@@ -1,0 +1,8 @@
+# Nomi di file da ignorare
+.DS_Store
+
+# Nomi di file da ignorare con wildcard (per estensione)
+
+# Cartelle da ignorare
+datasets/
+
