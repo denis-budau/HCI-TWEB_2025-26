@@ -1,0 +1,5 @@
+//STUFF to add to the Report later
+
+We started by building the Express + Handlebars base project inside solution/frontend/.
+This allows us to develop and test the UI immediately and progressively integrate the API later.
+Handlebars was chosen because it provides logic-less templating, automatically integrates with Express, and keeps the frontend simple.
