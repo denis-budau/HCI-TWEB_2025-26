@@ -12,11 +12,7 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views')); //it looks like the layout.hbs is not linked anywhere but the app just renders the index.hbs without passing from the layout
 app.set('view engine', 'hbs');
-app.engine('hbs', exphbs.engine({
-    extname: 'hbs',
-    defaultLayout: 'layout',
-    layoutsDir: path.join(__dirname, 'views/layouts'),
-}));
+
 
 app.use(logger('dev'));
 app.use(express.json());
