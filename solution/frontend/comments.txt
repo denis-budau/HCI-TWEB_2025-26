@@ -7,3 +7,22 @@ Handlebars was chosen because it provides logic-less templating, automatically i
 
 For the frontend we should not upload the node_modules folder.
 Instead, when we run it on another device we should run npm install.
+
+Nel tuo progetto, dovresti utilizzare MongoDB per i dati altamente dinamici (come i rating o le recensioni) e PostgreSQL (SQL) per i dati largamente statici e che necessitano di strong consistency (come attori, film, o dati transazionali)
+
+### TWEB
+Search bar with selector between anime, films, actors bla bla bla
+
+##### SECTION Top Ranked Animes
+Check MyAnimeList
+
+
+# EXAM TIPS
+Aver capito cleaning, analisi, visualizzazione (tutti i tipi map, corplex, seaborn)
+
+Usare sia postgres che Mongo, sia express che springboot, handlebars (o react) e non altro
+
+CONTROLLA SELF ASSESTMENT FORM
+NON SOTTOVALUTARE la parte di HCI
+
+Commentare con documentazione: per la documentazione, per ogni root di express e springboot spiegare cosa fa, input output e errori
