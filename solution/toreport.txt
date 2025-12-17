@@ -1,0 +1,14 @@
+Some conda commands:
+
+conda env list
+conda activate geopandas_env
+conda install -c conda-forge seaborn
+
+BEFORE delivering the project, we can export the conda environment so that 
+the lecturer could have the same modules installed and ready to execute
+//on our side
+conda env export --from-history > environment.yml
+//on the other side
+conda env create -f environment.yml
+conda activate geopandas_env
+
