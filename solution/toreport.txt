@@ -3,6 +3,8 @@ Some conda commands:
 conda env list
 conda activate geopandas_env
 conda install -c conda-forge seaborn
+conda install conda-forge::geopandas //actually not needed in our project, we use plotly express choropleth instead (that contains the map shape files already)
+
 
 BEFORE delivering the project, we can export the conda environment so that 
 the lecturer could have the same modules installed and ready to execute
@@ -12,3 +14,8 @@ conda env export --from-history > environment.yml
 conda env create -f environment.yml
 conda activate geopandas_env
 
+
+#router in flask is not required in the assignment BUT we could add it in the assignment for sophisticated data
+so we can have more points :)
+
+e.g. we could have an "Insight" page on the web page with plots and stuff, and write our story there
