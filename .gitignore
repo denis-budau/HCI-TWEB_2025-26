@@ -5,7 +5,8 @@
 
 # Cartelle da ignorare
 datasets/
-frontend/node_modules/
+main_server/node_modules/
+mongodb_server/node_modules/
 .idea/
 .venv/
 

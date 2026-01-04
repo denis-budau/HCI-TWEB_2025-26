@@ -1,15 +1,15 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
 
 const {engine} = require('express-handlebars');
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.engine('hbs', engine({
@@ -20,7 +20,7 @@ app.engine('hbs', engine({
 }));
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views/pages')); //it looks like the layout.hbs is not linked anywhere but the app just renders the index.hbs without passing from the layout
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 
