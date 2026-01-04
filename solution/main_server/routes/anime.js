@@ -3,6 +3,13 @@ const router = express.Router();
 const AXIOS = require('axios');
 const anime_controller = require('../controllers/animeController');
 
+/**
+ * @swagger
+ * /getAnimes:
+ *
+ *
+ * */
+
 // ROUTER PER AVERE TUTTI GLI ANIME
 async function getAnime(req, res) {
     try {

@@ -2,6 +2,13 @@ const express = require('express');
 const router = express.Router();
 const userProfileController = require('../controllers/userProfileController');
 
+/**
+ * @swagger
+ * /userProfile:
+ *
+ *
+ * */
+
 // ROUTER PER AVERE TUTTI GLI UTENTI
 router.get('/userProfile',async (req, res) => {
     try {

@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "main_server",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -10,8 +10,9 @@
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "express-handlebars": "^8.0.1",
-    "hbs": "~4.0.4",
     "http-errors": "~1.6.3",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   }
 }

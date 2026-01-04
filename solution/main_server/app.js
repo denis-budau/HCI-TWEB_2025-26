@@ -19,6 +19,7 @@ app.engine('hbs', engine({
     partialsDir: path.join(__dirname, 'views/partials')
 }));
 
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -46,7 +47,39 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('/error');
 });
+
+// app.js
+const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+
+// --- Swagger setup ---
+const swaggerOptions = {
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'Anime Data Aggregator - Main Server',
+            version: '1.0.0',
+            description: 'Main server API (aggregates results from satellites).'
+        },
+        servers: [
+            { url: 'http://localhost:3000' }
+        ],
+    },
+
+    // IMPORTANT:
+    // Use absolute paths so it works no matter where you run node from.
+    apis: [
+        path.join(__dirname, 'routes', '*.js'),
+        path.join(__dirname, 'controllers', '*.js'), // optional if you put docs there
+    ],
+};
+
+const swaggerSpec = swaggerJSDoc(swaggerOptions);
+
+// Swagger UI endpoint
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 
 module.exports = app;
