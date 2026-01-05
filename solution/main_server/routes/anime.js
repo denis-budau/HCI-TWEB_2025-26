@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const AXIOS = require('axios');
+const axios = require('axios');
 const anime_controller = require('../controllers/animeController');
 
 /**
@@ -14,7 +14,7 @@ const anime_controller = require('../controllers/animeController');
 async function getAnime(req, res) {
     try {
         // Effettua una richiesta GET per ottenere tutti i film
-        const response = await AXIOS.get(`http://localhost:8080/anime/getAnimes`);
+        const response = await axios.get(`http://localhost:8080/anime/getAnimes`);
 
     } catch (error) {
         // Log dell'errore nel caso in cui la richiesta fallisca
