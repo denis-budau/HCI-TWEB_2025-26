@@ -34,23 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('/error');
-});
-
-// app.js
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
@@ -67,13 +51,7 @@ const swaggerOptions = {
             { url: 'http://localhost:3000' }
         ],
     },
-
-    // IMPORTANT:
-    // Use absolute paths so it works no matter where you run node from.
-    apis: [
-        path.join(__dirname, 'routes', '*.js'),
-        path.join(__dirname, 'controllers', '*.js'), // optional if you put docs there
-    ],
+    apis: [path.join(__dirname, 'routes/*.js')],
 };
 
 const swaggerSpec = swaggerJSDoc(swaggerOptions);
@@ -81,5 +59,21 @@ const swaggerSpec = swaggerJSDoc(swaggerOptions);
 // Swagger UI endpoint
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
+});
+
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('pages/error');
+});
 
 module.exports = app;
