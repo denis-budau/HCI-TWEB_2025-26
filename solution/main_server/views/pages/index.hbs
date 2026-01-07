@@ -1,2 +1,8 @@
 <h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<!--- solo per provare a ricevere 10 username di utenti --->
+<h1>Primi 10 utenti</h1>
+<ul>
+    {{#each usernames}}
+        <li>{{this}}</li>
+    {{/each}}
+</ul><p>Welcome to {{title}}</p>

@@ -5,7 +5,7 @@
 const http = require('http');
 const app = require('../app');
 const debug = require('debug')('mongodb_server:server');
-const { connectDB } = require('../databases/database'); // CJS import
+const connectDB = require('../databases/database'); // CJS import
 
 /**
  * Get port from environment and store in Express.

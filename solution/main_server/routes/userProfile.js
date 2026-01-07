@@ -14,8 +14,11 @@ const userProfileController = require('../controllers/userProfileController');
 router.get('/userProfile',async (req, res) => {
     try {
         // Chiamata al secondo server (express) per ottenere i dati degli utenti
-        const response = await axios.get('http://localhost:3001/userProfile');
-        res.json(response.data);
+        const response  = await axios.get('http://localhost:3001/userProfile');
+
+        const usernames = response.data.map(u => u.username);
+
+        console.log('✅ Username ricevuti:', usernames.slice(0, 10)); // primi 10 solo per prova
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
