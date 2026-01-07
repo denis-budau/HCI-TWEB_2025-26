@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const UserProfileSchema = new mongoose.Schema({
+    id: { type: Number, required: true },
     username: { type: String, required: true },
     location: { type: String, required: true },
     joined: { type: Date, required: true },

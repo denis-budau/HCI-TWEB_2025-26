@@ -6,12 +6,12 @@ const userProfileController = require("../controllers/userProfileController");
 router.get('/getUserProfile', userProfileController.getAllUser);
 
 // Con metodo in controller che comunicherà con il db per utente specifico
-router.get('/userProfile/:username', userProfileController.getUser);
+router.get('/:username', userProfileController.getUser);
 
 // Con metodo in controller che comunicherà con il db per ratings di un anime specifico
-router.get('/anime/:id/ratings', userProfileController.getAnimeRatings);
+router.get('/anime/:anime_id/ratings', userProfileController.getAnimeRatings);
 
 // Con metodo in controller che comunicherà con il db per ratings di un utente specifico
-router.get('/userProfile/:username/ratings/', userProfileController.getUserRatings);
+router.get('/user/:username/ratings', userProfileController.getUserRatings);
 
 module.exports = router;

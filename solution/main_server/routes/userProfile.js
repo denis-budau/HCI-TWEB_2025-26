@@ -26,7 +26,7 @@ router.get('/getUserProfile',async (req, res) => {
 })
 
 // Tutte le info di un utente specifico
-router.get('/userProfile/:username', async (req, res) => {
+router.get('/:username', async (req, res) => {
     try {
         const { username } = req.params;
 
@@ -40,11 +40,11 @@ router.get('/userProfile/:username', async (req, res) => {
 })
 
 // Tutti i ratings di un anime
-router.get('/anime/:id/ratings', async (req, res) => {
+router.get('/anime/:anime_id/ratings', async (req, res) => {
     try {
-        const { id } = req.params;
+        const { anime_id } = req.params;
 
-        const response = await axios.get(`http://localhost:3001/anime/${id}/ratings`);
+        const response = await axios.get(`http://localhost:3001/userProfile/anime/${anime_id}/ratings`);
         res.json(response.data);
 
     } catch (error) {
@@ -53,10 +53,10 @@ router.get('/anime/:id/ratings', async (req, res) => {
 })
 
 // Tutti i ratings dati da un utente
-router.get('/userProfile/:username/ratings/', async (req, res) => {
+router.get('/user/:username/ratings/', async (req, res) => {
     try {
         const { username } = req.params;
-        const response = await axios.get(`http://localhost:3001/userProfile/${username}/ratings`);
+        const response = await axios.get(`http://localhost:3001/userProfile/user/${username}/ratings`);
         res.json(response.data);
     } catch (error) {
         res.status(500).json({ error: error.message });
