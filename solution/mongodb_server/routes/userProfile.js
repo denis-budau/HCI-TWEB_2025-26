@@ -3,7 +3,7 @@ var router = express.Router();
 const userProfileController = require("../controllers/userProfileController");
 
 // Con metodo in controller che comunicherà con il db per lista di tutti gli utenti
-router.get('/userProfile', userProfileController.getAllUser);
+router.get('/getUserProfile', userProfileController.getAllUser);
 
 // Con metodo in controller che comunicherà con il db per utente specifico
 router.get('/userProfile/:username', userProfileController.getUser);
@@ -13,3 +13,5 @@ router.get('/anime/:id/ratings', userProfileController.getAnimeRatings);
 
 // Con metodo in controller che comunicherà con il db per ratings di un utente specifico
 router.get('/userProfile/:username/ratings/', userProfileController.getUserRatings);
+
+module.exports = router;

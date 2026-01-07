@@ -11,14 +11,15 @@ const userProfileController = require('../controllers/userProfileController');
  * */
 
 // Tutti gli utenti
-router.get('/userProfile',async (req, res) => {
+router.get('/getUserProfile',async (req, res) => {
+    console.log('➡️ Arrivata richiesta GET /userProfile/getUserProfile su server 3000');
     try {
         // Chiamata al secondo server (express) per ottenere i dati degli utenti
-        const response  = await axios.get('http://localhost:3001/userProfile');
-
+        const response = await axios.get('http://localhost:3001/userProfile/getUserProfile');
+        console.log('✅ Risposta ricevuta da 3001:', response.data.slice(0, 5));
         const usernames = response.data.map(u => u.username);
-
-        console.log('✅ Username ricevuti:', usernames.slice(0, 10)); // primi 10 solo per prova
+        console.log('✅ Username ricevuti:', usernames.slice(0, 10));
+        res.json({ usernames: usernames.slice(0, 10) });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

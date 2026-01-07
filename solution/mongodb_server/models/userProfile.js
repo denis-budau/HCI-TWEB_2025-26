@@ -11,4 +11,4 @@ const UserProfileSchema = new mongoose.Schema({
     plan_to_watch: { type: Number, required: true },
 });
 
-module.exports = mongoose.model('UserProfile', UserProfileSchema);
+module.exports = mongoose.model('UserProfile', UserProfileSchema, 'user_profile');
