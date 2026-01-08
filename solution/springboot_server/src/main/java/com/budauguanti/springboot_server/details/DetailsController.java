@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @RestController
-@RequestMapping("/anime")
+@RequestMapping("/anime/")
 public class DetailsController {
 
     private final DetailsService service;
@@ -18,7 +18,7 @@ public class DetailsController {
 
     // @PathVariable se vogliamo non usare ?title
     // dettagli di un anime in particolare
-    @GetMapping("/details/{title}")
+    @GetMapping("/{title}")
     public List<Details> search(@PathVariable String title) {
         return service.searchByTitle(title);
     }
