@@ -18,4 +18,6 @@ public class DetailsService {
     public List<Details> searchByTitle(String title) {
         return repository.findByTitleContainingIgnoreCase(title);
     }
+
+    public List<Details> findAll() { return repository.findAll(); } // repository estende JpaRepository
 }
