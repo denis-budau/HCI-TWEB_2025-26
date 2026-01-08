@@ -1,9 +1,9 @@
 package com.budauguanti.springboot_server.details;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 
 
 @Entity
@@ -19,9 +19,10 @@ public class Details {
     @Column(name = "title_japanese")
     private String titleJapanese;
 
+    @Column(columnDefinition = "TEXT")
     private String url;
 
-    @Column(name = "image_url")
+    @Column(name = "image_url", columnDefinition = "TEXT")
     private String imageUrl;
 
     private String type;
@@ -46,13 +47,25 @@ public class Details {
     private Integer members;
     private Integer favorites;
 
-    // Lists stored as CSV strings (simple & acceptable)
+    @Column(columnDefinition = "TEXT")
     private String genres;
+
+    @Column(columnDefinition = "TEXT")
     private String studios;
+
+    @Column(columnDefinition = "TEXT")
     private String themes;
+
+    @Column(columnDefinition = "TEXT")
     private String demographics;
+
+    @Column(columnDefinition = "TEXT")
     private String producers;
+
+    @Column(columnDefinition = "TEXT")
     private String licensors;
+
+    @Column(columnDefinition = "TEXT")
     private String streaming;
 
     private String source;
@@ -61,7 +74,7 @@ public class Details {
     private String season;
     private Integer year;
 
-    @Column(name = "explicit_genres")
+    @Column(name = "explicit_genres", columnDefinition = "TEXT")
     private String explicitGenres;
 
     //generated empty constructor

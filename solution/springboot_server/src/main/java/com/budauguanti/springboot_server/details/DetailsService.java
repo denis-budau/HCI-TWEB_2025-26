@@ -1,6 +1,7 @@
 package com.budauguanti.springboot_server.details;
 
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ public class DetailsService {
 
     private final DetailsRepository repository;
 
+    @Autowired
     public DetailsService(DetailsRepository repository) {
         this.repository = repository;
     }
