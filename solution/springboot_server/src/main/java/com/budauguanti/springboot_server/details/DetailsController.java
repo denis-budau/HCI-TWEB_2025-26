@@ -1,15 +1,12 @@
 package com.budauguanti.springboot_server.details;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/details")
+@RequestMapping("/anime/")
 public class DetailsController {
 
     private final DetailsService service;
@@ -19,8 +16,17 @@ public class DetailsController {
         this.service = service;
     }
 
-    @GetMapping
-    public List<Details> search(@RequestParam String title) {
+    // @PathVariable se vogliamo non usare ?title
+    // dettagli di un anime in particolare
+    @GetMapping("/{title}")
+    public List<Details> search(@PathVariable String title) {
         return service.searchByTitle(title);
     }
+
+    // ritorna tutti gli anime
+    @GetMapping("/getAnime")
+    public List<Details> getAllAnime() {
+        return service.findAll();  // devi creare findAll() in DetailsService
+    }
 }
+

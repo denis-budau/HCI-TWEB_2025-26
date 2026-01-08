@@ -10,21 +10,20 @@ const anime_controller = require('../controllers/animeController');
  *
  * */
 
-// ROUTER PER AVERE TUTTI GLI ANIME
-async function getAnime(req, res) {
-    try {
-        // Effettua una richiesta GET per ottenere tutti i film
-        const response = await axios.get(`http://localhost:8080/anime/getAnimes`);
+// ROUTER PER AVERE UN ANIME SPECIFICO
+router.get('/:anime', anime_controller.getAnimeDetails);
 
-    } catch (error) {
-        // Log dell'errore nel caso in cui la richiesta fallisca
-        console.error('Errore nel recupero dei film dal server Spring:', error);
-        res.status(500).render('pages/error', { message: 'Dati non disponibili' });
-    }
-}
+// ROUTER PER AVERE TUTTI GLI ANIME
+router.get('/getAnime', anime_controller.getAllAnime);
+
+// ROUTER PER AVERE TUTTI GLI PERSON (ATTORI)
+router.get('/getPerson', anime_controller.getAllPerson)
+
+// ROUTER PER AVERE UN PERSON SPECIFICO
+router.get('/:person', anime_controller.getPersonDetails)
 
 // ROUTER PER AVERE TUTTE LE INFO DI UN ANIME SPECIFICO,
-router.get('/anime_info', anime_controller.getAnimeInfo);
+//router.get('/anime_info', anime_controller.getAnimeInfo);
 
 
 module.exports = router;
