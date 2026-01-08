@@ -1,29 +1,74 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const axios = require('axios');
-const anime_controller = require('../controllers/animeController');
+const animeController = require("../controllers/animeController");
+/**
+ * @swagger
+ * tags:
+ *   - name: SQL Satellite Proxy
+ *     description: Main server endpoints that proxy the Spring Boot SQL satellite (port 8082)
+ */
+
 
 /**
  * @swagger
- * /getAnimes:
- *
- *
- * */
+ * /api/anime:
+ *   get:
+ *     tags: [SQL Satellite Proxy]
+ *     summary: Get all anime
+ *     responses:
+ *       200:
+ *         description: List of anime
+ */
+router.get("/anime", animeController.getAllAnime);
 
-// ROUTER PER AVERE UN ANIME SPECIFICO
-router.get('/:anime', anime_controller.getAnimeDetails);
+/**
+ * @swagger
+ * /api/anime/search:
+ *   get:
+ *     tags: [SQL Satellite Proxy]
+ *     summary: Search anime by title (partial match)
+ *     parameters:
+ *       - in: query
+ *         name: title
+ *         required: true
+ *         schema:
+ *           type: string
+ *         example: naruto
+ *     responses:
+ *       200:
+ *         description: Matching anime
+ */
+router.get("/anime/search", animeController.searchAnime);
 
-// ROUTER PER AVERE TUTTI GLI ANIME
-router.get('/getAnime', anime_controller.getAllAnime);
+/**
+ * @swagger
+ * /api/persons:
+ *   get:
+ *     tags: [SQL Satellite Proxy]
+ *     summary: Get all persons
+ *     responses:
+ *       200:
+ *         description: List of persons
+ */
+router.get("/persons", animeController.getAllPersons);
 
-// ROUTER PER AVERE TUTTI GLI PERSON (ATTORI)
-router.get('/getPerson', anime_controller.getAllPerson)
-
-// ROUTER PER AVERE UN PERSON SPECIFICO
-router.get('/:person', anime_controller.getPersonDetails)
-
-// ROUTER PER AVERE TUTTE LE INFO DI UN ANIME SPECIFICO,
-//router.get('/anime_info', anime_controller.getAnimeInfo);
-
+/**
+ * @swagger
+ * /api/persons/search:
+ *   get:
+ *     tags: [SQL Satellite Proxy]
+ *     summary: Search persons by name (partial match)
+ *     parameters:
+ *       - in: query
+ *         name: name
+ *         required: true
+ *         schema:
+ *           type: string
+ *         example: Hayao
+ *     responses:
+ *       200:
+ *         description: Matching persons
+ */
+router.get("/persons/search", animeController.searchPersons);
 
 module.exports = router;

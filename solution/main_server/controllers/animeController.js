@@ -1,61 +1,59 @@
 const axios = require("axios");
 
-async function getAnimeDetails(req, res) {
-    console.log("'➡️ Arrivata richiesta GET /anime/getAnimeDetails su server 3000'")
-    try {
-        const { anime } = req.params;
-
-        const response = await axios.get(`http://localhost:8082/anime/${anime}`);
-
-        res.json(response.data);
-
-    } catch (error) {
-        res.status(500).json({error: error.message});
-    }
-}
+const spring = axios.create({
+    baseURL: "http://localhost:8082",
+    timeout: 5000,
+});
 
 async function getAllAnime(req, res) {
-    console.log("'➡️ Arrivata richiesta GET /anime/getAllAnime su server 3000'")
+    console.log("➡️ GET /api/anime");
     try {
-        // Effettua una richiesta GET per ottenere tutti i film
-        const response = await axios.get(`http://localhost:8082/anime/getAnime`);
-
-        res.json(response.data);
-
+        const { data } = await spring.get("/anime");
+        res.json(data);
     } catch (error) {
-        // Log dell'errore nel caso in cui la richiesta fallisca
-        console.error('Errore nel recupero dei film dal server Spring:', error);
-        res.status(500).render('pages/error', { message: 'Dati non disponibili' });
+        console.error("Spring GET /anime failed:", error.message);
+        res.status(502).json({ error: "SQL satellite unavailable" });
     }
 }
 
-async function getPersonDetails(req, res) {
-    console.log("'➡️ Arrivata richiesta GET /anime/getPersonDetails su server 3000'")
+async function searchAnime(req, res) {
+    console.log("➡️ GET /api/anime/search", req.query);
     try {
-        const { person } = req.params;
-
-        const response = await axios.get(`http://localhost:8082/anime/${person}`);
-
-        res.json(response.data);
-
+        const { title } = req.query;
+        const { data } = await spring.get("/anime/search", { params: { title } });
+        res.json(data);
     } catch (error) {
-        res.status(500).json({error: error.message});
+        console.error("Spring GET /anime/search failed:", error.message);
+        res.status(502).json({ error: "SQL satellite unavailable" });
     }
 }
 
-async function getAllPerson(req, res) {
-    console.log("'➡️ Arrivata richiesta GET /anime/getAllPerson su server 3000'")
+async function getAllPersons(req, res) {
+    console.log("➡️ GET /api/persons");
     try {
-        // Effettua una richiesta GET per ottenere tutti i person
-        const response = await axios.get(`http://localhost:8082/anime/getPerson`);
-
-        res.json(response.data);
-
+        const { data } = await spring.get("/persons");
+        res.json(data);
     } catch (error) {
-        // Log dell'errore nel caso in cui la richiesta fallisca
-        console.error('Errore nel recupero dei person dal server Spring:', error);
-        res.status(500).render('pages/error', { message: 'Dati non disponibili' });
+        console.error("Spring GET /persons failed:", error.message);
+        res.status(502).json({ error: "SQL satellite unavailable" });
     }
 }
 
-module.exports = {getAnimeDetails, getAllAnime, getPersonDetails, getAllPerson};
+async function searchPersons(req, res) {
+    console.log("➡️ GET /api/persons/search", req.query);
+    try {
+        const { name } = req.query;
+        const { data } = await spring.get("/persons/search", { params: { name } });
+        res.json(data);
+    } catch (error) {
+        console.error("Spring GET /persons/search failed:", error.message);
+        res.status(502).json({ error: "SQL satellite unavailable" });
+    }
+}
+
+module.exports = {
+    getAllAnime,
+    searchAnime,
+    getAllPersons,
+    searchPersons,
+};

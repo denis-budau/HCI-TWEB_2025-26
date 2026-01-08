@@ -3,12 +3,6 @@ const router = express.Router();
 const axios = require('axios');
 const userProfileController = require('../controllers/userProfileController');
 
-/**
- * @swagger
- * /userProfile:
- *
- *
- * */
 
 // Tutti gli utenti
 router.get('/getUserProfile',async (req, res) => {

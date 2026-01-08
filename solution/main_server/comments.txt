@@ -1,3 +1,6 @@
+//URL COMMANDS TO TRY if spring boot works
+http://localhost:3000/api/anime
+
 //STUFF to add to the Report later
 
 We started by building the Express + Handlebars base project inside solution/main_server/.

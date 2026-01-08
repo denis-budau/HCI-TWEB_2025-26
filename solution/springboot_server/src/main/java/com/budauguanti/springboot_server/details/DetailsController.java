@@ -31,23 +31,6 @@ public class DetailsController {
         this.service = service;
     }
 
-    // Return all anime
-    @Operation(summary = "Get all anime")
-    @ApiResponses({
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "Anime list retrieved successfully",
-                    content = @Content(
-                            mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = Details.class))
-                    )
-            )
-    })
-    @GetMapping
-    public List<Details> getAllAnime() {
-        return service.findAll();
-    }
-
     @Operation(
             summary = "Search anime by title (case-insensitive)",
             description = "Returns a list of anime whose title contains the given string (case-insensitive)."
@@ -74,5 +57,24 @@ public class DetailsController {
             @RequestParam String title
     ) {
         return service.searchByTitle(title);
+    }
+
+    @Operation(
+            summary = "Get all anime",
+            description = "Returns all anime currently stored in the database."
+)
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Anime list retrieved successfully",
+                    content = @Content(
+                            mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = Details.class))
+                    )
+            )
+    })
+    @GetMapping
+    public List<Details> getAllAnime() {
+        return service.findAll();
     }
 }
