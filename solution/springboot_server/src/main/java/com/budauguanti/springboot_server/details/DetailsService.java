@@ -7,7 +7,6 @@ import java.util.List;
 
 @Service
 public class DetailsService {
-
     private final DetailsRepository repository;
 
     @Autowired
@@ -19,5 +18,5 @@ public class DetailsService {
         return repository.findByTitleContainingIgnoreCase(title);
     }
 
-    public List<Details> findAll() { return repository.findAll(); } // repository estende JpaRepository
+    public List<Details> findAll() {return repository.findAll(); } // repository estende JpaRepository
 }

@@ -1,8 +1,7 @@
 package com.budauguanti.springboot_server.person;
 
-import com.budauguanti.springboot_server.details.Details;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -16,9 +15,9 @@ public class PersonService {
     }
 
     public List<Person> searchByName(String person) {
-        return repository.findByTitleContainingIgnoreCase(person);
+        return repository.findByNameContainingIgnoreCase(person);
     }
 
 
-    public List<Person> findAll() { return repository.findAll(); }
+    public List<Person> findAll() {return repository.findAll(); }
 }

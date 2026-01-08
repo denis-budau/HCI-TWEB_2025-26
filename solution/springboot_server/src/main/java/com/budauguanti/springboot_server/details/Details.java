@@ -10,7 +10,7 @@ import java.util.List;
 @Table
 public class Details {
     @Id
-    @Column(name="mal_id")
+    @Column(name="mal_id", nullable = false)
     private Integer malId;
 
     @Column(nullable = false)

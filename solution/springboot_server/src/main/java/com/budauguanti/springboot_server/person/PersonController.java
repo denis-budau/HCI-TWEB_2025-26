@@ -1,16 +1,25 @@
 package com.budauguanti.springboot_server.person;
 
-import com.budauguanti.springboot_server.details.Details;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.List;
 
+@Tag(
+        name = "Persons",
+        description = "Endpoints to retrieve person data stored in PostgreSQL"
+)
 @RestController
-@RequestMapping("/anime/")
+@RequestMapping("/persons")
 public class PersonController {
 
     private final PersonService service;
@@ -20,15 +29,51 @@ public class PersonController {
         this.service = service;
     }
 
-    // dettagli di un anime in particolare
-    @GetMapping("/{person}")
-    public List<Details> search(@PathVariable String person) {
-        return service.searchByName(person);
+    @Operation(
+            summary = "Search persons by name (case-insensitive)",
+            description = "Returns a list of persons whose name contains the given string (case-insensitive)."
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Person list retrieved successfully",
+                    content = @Content(
+                            mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = Person.class))
+                    )
+            ),
+            @ApiResponse(responseCode = "400", description = "Missing or invalid query parameter"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
+    @GetMapping("/search")
+    public List<Person> search(
+            @Parameter(
+                    description = "Name (or part of it) to search for",
+                    example = "Hayao",
+                    required = true
+            )
+            @RequestParam String name
+    ) {
+        return service.searchByName(name);
     }
 
-    // ritorna tutti gli anime
-    @GetMapping("/getPerson")
-    public List<Details> getAllPerson() {
-        return service.findAll();  // devi creare findAll() in DetailsService
+    @Operation(
+            summary = "Get all persons",
+            description = "Returns all persons currently stored in the database."
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Person list retrieved successfully",
+                    content = @Content(
+                            mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = Person.class))
+                    )
+            ),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
+    @GetMapping
+    public List<Person> getAllPersons() {
+        return service.findAll();
     }
 }

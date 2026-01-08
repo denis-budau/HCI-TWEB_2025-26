@@ -49,23 +49,36 @@ public class CsvPersonImporter implements CommandLineRunner {
 
 
         for (CSVRecord record : parser) {
-            Person d = new Person();
+            Integer id = parseInteger(record.get("person_mal_id"));
+            if (id == null) {
+                // Skip invalid rows (ID is mandatory)
+                continue;
+            }
 
+            Person p = new Person();
+            p.setPersonMalId(id);
 
-            repository.save(d);
+            p.setUrl(record.get("url"));
+            p.setWebsiteUrl(record.get("website_url"));
+            p.setImageUrl(record.get("image_url"));
+
+            p.setName(record.get("name"));
+            p.setGivenName(record.get("given_name"));
+            p.setFamilyName(record.get("family_name"));
+
+            //todo if you have time, consider normalizing to LocalDate and parsing during the import
+            //add if needed p.setBirthday(record.get("birthday"));
+            /*if you do so, change application.properties>spring.jpa.hibernate.ddl-auto=update
+            to create-drop so it refreshed the database*/
+
+            p.setFavorites(parseInteger(record.get("favorites")));
+            p.setRelevantLocation(record.get("relevant_location"));
+
+            repository.save(p);
         }
 
+
         System.out.println("CSV import completed.");
-    }
-
-
-    private String normalizeListField(String raw) {
-        if (raw == null || raw.isBlank() || raw.equals("[]")) return "";
-
-        return raw.replace("[", "")
-                .replace("]", "")
-                .replace("'", "")
-                .trim();
     }
 
     private Integer parseInteger(String s) {
@@ -78,13 +91,4 @@ public class CsvPersonImporter implements CommandLineRunner {
         }
     }
 
-    private Double parseDouble(String s) {
-        try {
-            //If the value is valid → store it
-            return Double.parseDouble(s);
-        } catch (Exception e) {
-            //If the value is missing or invalid → store NULL in the DB
-            return null;
-        }
-    }
 }
