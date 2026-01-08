@@ -18,6 +18,5 @@ public class PersonService {
         return repository.findByNameContainingIgnoreCase(person);
     }
 
-
     public List<Person> findAll() {return repository.findAll(); }
 }

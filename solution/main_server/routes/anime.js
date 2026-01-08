@@ -71,4 +71,8 @@ router.get("/persons", animeController.getAllPersons);
  */
 router.get("/persons/search", animeController.searchPersons);
 
+router.get("/character", animeController.getAllCharacter);
+
+router.get("/character/search", animeController.searchCharacter);
+
 module.exports = router;
