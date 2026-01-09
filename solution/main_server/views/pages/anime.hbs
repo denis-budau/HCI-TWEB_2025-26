@@ -1,0 +1,58 @@
+<main class="container my-4">
+
+    <!-- Page header -->
+    <div class="d-flex flex-column flex-md-row align-items-md-end justify-content-between gap-3 mb-3">
+        <div>
+            <h1 class="h3 mb-1">Anime search</h1>
+            <p class="text-muted mb-0">
+                Results for:
+                {{#if query}}
+                    <span class="fw-semibold">"{{query}}"</span>
+                {{else}}
+                    <span class="fw-semibold">""</span>
+                {{/if}}
+            </p>
+        </div>
+
+        <!-- Search bar (repeat on results page) -->
+        <form id="searchForm" class="w-100 w-md-auto" role="search">
+            <div class="input-group">
+                <input
+                        id="searchInput"
+                        name="title"
+                        type="text"
+                        class="form-control"
+                        placeholder="Search anime title..."
+                        value="{{query}}"
+                        aria-label="Search anime title"
+                        required
+                >
+                <button class="btn btn-dark" type="submit">Search</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Status / errors -->
+    <div id="statusMessage" class="alert alert-info d-none" role="status">
+        Searching…
+    </div>
+
+    <div id="errorMessage" class="alert alert-danger d-none" role="alert">
+        Something went wrong while contacting the SQL satellite.
+    </div>
+
+    <!-- Results summary -->
+    <div id="resultsSummary" class="text-muted small mb-3 d-none"></div>
+
+    <!-- Results grid -->
+    <div id="resultsGrid" class="row g-3"></div>
+
+    <!-- Empty state -->
+    <div id="emptyState" class="border rounded p-4 text-center d-none">
+        <div class="mb-2 fw-semibold">No results found</div>
+        <div class="text-muted">Try a different title (e.g., Naruto, One Piece, Bleach).</div>
+    </div>
+
+</main>
+
+<script src="/javascripts/anime.js"></script>
