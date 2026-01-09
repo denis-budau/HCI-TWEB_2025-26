@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
         el.classList.toggle("d-none", !visible);
     }
 
+    // per evitare attacco xss
     function escapeHtml(str) {
         return String(str)
             .replaceAll("&", "&amp;")
