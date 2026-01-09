@@ -8,106 +8,62 @@ document.addEventListener("DOMContentLoaded", () => {
     const grid = document.getElementById("resultsGrid");
     const emptyState = document.getElementById("emptyState");
 
+    const card = document.getElementById("animeCardTemplate");
+
     // If the page was opened with ?title=...
     const params = new URLSearchParams(window.location.search);
     const initialTitle = params.get("title") || input?.value || "";
 
-    // Keep UI helpers small and obvious
-    function setVisible(el, visible) {
-        if (!el) return;
-        el.classList.toggle("d-none", !visible);
-    }
-
-    // per evitare attacco xss
-    function escapeHtml(str) {
-        return String(str)
-            .replaceAll("&", "&amp;")
-            .replaceAll("<", "&lt;")
-            .replaceAll(">", "&gt;")
-            .replaceAll('"', "&quot;")
-            .replaceAll("'", "&#039;");
-    }
-
     function renderCard(anime) {
-        const title = escapeHtml(anime.title ?? "Untitled");
-        const titleJp = escapeHtml(anime.title_japanese ?? "");
-        const score = anime.score ?? null;
-        const episodes = anime.episodes ?? null;
+        const clone = card.content.cloneNode(true);
 
-        // If you stored list-like fields as comma-separated strings
-        const genres = (anime.genres ?? "").toString().split(",").map(s => s.trim()).filter(Boolean);
-        const studios = (anime.studios ?? "").toString().split(",").map(s => s.trim()).filter(Boolean);
+        clone.querySelector(".card-title").textContent = anime.title;
+        clone.querySelector(".card-score").textContent = anime.score ? `⭐ ${anime.score}` : "⭐ no score";
+        clone.querySelector(".card-genres").textContent = anime.genres;
+        clone.querySelector(".card-img-top").src = anime.imageUrl;
 
-        const badges = [
-            ...genres.slice(0, 3).map(g => `<span class="badge text-bg-secondary me-1">${escapeHtml(g)}</span>`),
-            ...studios.slice(0, 2).map(s => `<span class="badge text-bg-light border me-1">${escapeHtml(s)}</span>`),
-        ].join("");
-
-        const meta = [
-            score !== null && score !== "" ? `⭐ ${escapeHtml(score)}` : null,
-            episodes !== null && episodes !== "" ? `${escapeHtml(episodes)} eps` : null,
-            titleJp ? `JP: ${titleJp}` : null,
-        ].filter(Boolean).join(" · ");
-
-        return `
-      <div class="col-12 col-md-6 col-lg-4">
-        <div class="card h-100">
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title mb-2">${title}</h5>
-            ${meta ? `<div class="text-muted small mb-3">${meta}</div>` : `<div class="text-muted small mb-3"> </div>`}
-            <div class="mt-auto">
-              ${badges || `<span class="text-muted small">No tags</span>`}
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
+        return clone;
     }
 
-    async function fetchAndRender(title) {
-        const q = (title || "").trim();
+    async function AxiosAndRender(title) {
+        const inputValue = (title || "").trim();
 
         // Reset UI
         grid.innerHTML = "";
-        setVisible(emptyState, false);
-        setVisible(errorBox, false);
-        setVisible(summary, false);
+        emptyState.style.display = "none";
+        errorBox.style.display = "none";
+        summary.style.display = "none";
 
-        if (!q) {
-            setVisible(emptyState, true);
+        if (!inputValue) {
+            emptyState.style.display = "block"
             emptyState.querySelector(".fw-semibold").textContent = "Type a title to search";
             return;
         }
 
-        setVisible(status, true);
+        status.style.display = "block"
 
         try {
-            const res = await fetch(`/api/anime/search?title=${encodeURIComponent(q)}`, {
-                headers: { "Accept": "application/json" }
-            });
+            const res = await axios.get("/api/anime/search", { params: { title: inputValue } });
+            const results = Array.isArray(res.data) ? res.data : [];
 
-            if (!res.ok) {
-                throw new Error(`HTTP ${res.status}`);
-            }
+            status.style.display = "none";
 
-            const data = await res.json();
-            const results = Array.isArray(data) ? data : [];
-
-            setVisible(status, false);
-
-            summary.textContent = `${results.length} result(s) for "${q}"`;
-            setVisible(summary, true);
+            summary.textContent = `${results.length} result for "${inputValue}"`;
+            summary.style.display = "block";
 
             if (results.length === 0) {
-                setVisible(emptyState, true);
+                summary.style.display = "block";
                 return;
             }
 
-            grid.innerHTML = results.map(renderCard).join("");
+            results.forEach(anime => {
+                const cardNode = renderCard(anime);
+                grid.appendChild(cardNode);
+            });
         } catch (err) {
             console.error("Search failed:", err);
-            setVisible(status, false);
-            setVisible(errorBox, true);
+            status.style.display = "none";
+            errorBox.style.display = "block";
         }
     }
 
@@ -115,13 +71,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (form) {
         form.addEventListener("submit", (e) => {
             e.preventDefault();
-            const q = input.value.trim();
-            window.location.href = `/anime?title=${encodeURIComponent(q)}`;
+            const inputValue = input.value.trim();
+            window.location.href = `/anime?title=${encodeURIComponent(inputValue)}`;
         });
     }
 
     // Auto-run search if ?title=... is present
     if (initialTitle.trim()) {
-        fetchAndRender(initialTitle);
+        AxiosAndRender(initialTitle);
     }
 });

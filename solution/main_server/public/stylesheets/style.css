@@ -3,6 +3,12 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: #994444;
 }
+   /* Forza tutte le immagini delle card a 200x300px */
+.anime-img {
+   width: 100%;      /* occuperà tutta la larghezza della card */
+   height: 300px;    /* altezza fissa */
+   object-fit: cover; /* taglia/ritaglia l'immagine senza distorcerla */
+}
 
 .hero-section { background: linear-gradient(135deg, #710202 0%, #712e11 100%); color: white; padding: 4rem 0; }
 .anime-card { transition: transform 0.2s; cursor: pointer; }
