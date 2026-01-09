@@ -61,6 +61,7 @@ public class CsvDetailsImporter implements CommandLineRunner {
 
             d.setScore(parseDouble(record.get("score")));
             d.setEpisodes(parseInteger(record.get("episodes")));
+            d.setImageUrl(record.get("image_url"));
             //todo extend if more fields needed
             /*if you do so, change application.properties>spring.jpa.hibernate.ddl-auto=update
             to create-drop so it refreshed the database*/
