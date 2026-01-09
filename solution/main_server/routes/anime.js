@@ -33,7 +33,7 @@ router.get("/anime", animeController.getAllAnime);
  *         required: true
  *         schema:
  *           type: string
- *         example: naruto
+ *         example: Naruto
  *     responses:
  *       200:
  *         description: Matching anime

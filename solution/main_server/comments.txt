@@ -1,5 +1,10 @@
-//URL COMMANDS TO TRY if spring boot works
+//URL COMMANDS TO TRY if spring boot works with express
 http://localhost:3000/api/anime
+
+//COMMANDS FOR MONGODB
+http://localhost:3001/favs
+//FOR MONGODB AND MAIN SERVER
+http://localhost:3000/api/favs
 
 //STUFF to add to the Report later
 

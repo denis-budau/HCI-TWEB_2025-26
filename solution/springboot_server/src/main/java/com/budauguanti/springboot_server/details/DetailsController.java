@@ -51,7 +51,7 @@ public class DetailsController {
     public List<Details> search(
             @Parameter(
                     description = "Title (or part of it) to search for",
-                    example = "naruto",
+                    example = "Naruto",
                     required = true
             )
             @RequestParam String title

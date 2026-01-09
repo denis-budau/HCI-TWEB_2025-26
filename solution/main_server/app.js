@@ -8,6 +8,8 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const userProfileRouter = require('./routes/userProfile');
 const animeRouter = require('./routes/anime');
+const favsRouter = require('./routes/favs');
+const recommendationsRouter = require('./routes/recommendations');
 
 const {engine} = require('express-handlebars');
 
@@ -37,6 +39,9 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/userProfile', userProfileRouter);
 app.use('/api', animeRouter);
+app.use("/api", favsRouter);
+app.use("/api", recommendationsRouter);
+
 
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');

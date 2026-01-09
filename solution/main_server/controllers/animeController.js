@@ -6,7 +6,7 @@ const spring = axios.create({
 });
 
 async function getAllAnime(req, res) {
-    console.log("➡️ GET /api/anime");
+    console.log("GET /api/anime");
     try {
         const { data } = await spring.get("/anime");
         res.json(data);
@@ -17,7 +17,7 @@ async function getAllAnime(req, res) {
 }
 
 async function searchAnime(req, res) {
-    console.log("➡️ GET /api/anime/search", req.query);
+    console.log("GET /api/anime/search", req.query);
     try {
         const { title } = req.query;
         const { data } = await spring.get("/anime/search", { params: { title } });
@@ -29,7 +29,7 @@ async function searchAnime(req, res) {
 }
 
 async function getAllPersons(req, res) {
-    console.log("➡️ GET /api/persons");
+    console.log("GET /api/persons");
     try {
         const { data } = await spring.get("/persons");
         res.json(data);
@@ -40,7 +40,7 @@ async function getAllPersons(req, res) {
 }
 
 async function searchPersons(req, res) {
-    console.log("➡️ GET /api/persons/search", req.query);
+    console.log("GET /api/persons/search", req.query);
     try {
         const { name } = req.query;
         const { data } = await spring.get("/persons/search", { params: { name } });
@@ -52,7 +52,7 @@ async function searchPersons(req, res) {
 }
 
 async function getAllCharacter(req, res) {
-    console.log("➡️ GET /api/character");
+    console.log("GET /api/character");
     try {
         const { data } = await spring.get("/character");
         res.json(data);
@@ -63,7 +63,7 @@ async function getAllCharacter(req, res) {
 }
 
 async function searchCharacter(req, res) {
-    console.log("➡️ GET /api/character/search", req.query);
+    console.log("GET /api/character/search", req.query);
     try {
         const { name } = req.query;
         const { data } = await spring.get("/character/search", { params: { name } });
