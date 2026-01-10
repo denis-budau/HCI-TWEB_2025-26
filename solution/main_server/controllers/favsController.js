@@ -28,7 +28,4 @@ async function getFavsByUser(req, res) {
     }
 }
 
-module.exports = {
-    getFavs,
-    getFavsByUser
-};
+module.exports = {getFavs, getFavsByUser};

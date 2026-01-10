@@ -30,7 +30,4 @@ async function getRecommendationsOfAnime(req, res) {
     }
 }
 
-module.exports = {
-    getRecommendations,
-    getRecommendationsOfAnime
-};
+module.exports = {getRecommendations, getRecommendationsOfAnime};
