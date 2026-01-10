@@ -7,6 +7,10 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const userProfileRouter = require('./routes/userProfile');
+const ratingsRouter = require('./routes/ratings');
+const favsRouter = require('./routes/favs');
+const recommendationsRouter = require('./routes/recommendations');
+
 
 const {engine} = require('express-handlebars');
 
@@ -35,6 +39,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/userProfile', userProfileRouter);
+app.use('/ratings', ratingsRouter)
+app.use('/favs', favsRouter);
+app.use('/recommendations', recommendationsRouter);
 
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');

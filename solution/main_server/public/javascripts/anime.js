@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
         status.style.display = "block"
 
         try {
-            const res = await axios.get("/api/anime/search", { params: { title: inputValue } });
+            const res = await axios.get("/anime/search", { params: { title: inputValue } });
             const results = Array.isArray(res.data) ? res.data : [];
 
             status.style.display = "none";
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
         form.addEventListener("submit", (e) => {
             e.preventDefault();
             const inputValue = input.value.trim();
-            window.location.href = `/anime?title=${encodeURIComponent(inputValue)}`;
+            window.location.href = `/anime/search?title=${encodeURIComponent(inputValue)}`;
         });
     }
 

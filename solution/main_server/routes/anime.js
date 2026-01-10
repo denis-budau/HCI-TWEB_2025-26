@@ -19,7 +19,7 @@ const animeController = require("../controllers/animeController");
  *       200:
  *         description: List of anime
  */
-router.get("/anime", animeController.getAllAnime);
+router.get("/getAllAnime", animeController.getAllAnime);
 
 /**
  * @swagger
@@ -38,6 +38,6 @@ router.get("/anime", animeController.getAllAnime);
  *       200:
  *         description: Matching anime
  */
-router.get("/anime/search", animeController.searchAnime);
+router.get("/search", animeController.searchAnime);
 
 module.exports = router;

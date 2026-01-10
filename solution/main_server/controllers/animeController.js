@@ -8,8 +8,8 @@ const spring = axios.create({
 async function getAllAnime(req, res) {
     console.log("GET /api/anime");
     try {
-        const { data } = await spring.get("/anime");
-        res.json(data);
+        const response = await spring.get("/anime/getAllAnime");
+        res.json(response.data);
     } catch (error) {
         console.error("Spring GET /anime failed:", error.message);
         res.status(502).json({ error: "SQL satellite unavailable" });
@@ -17,11 +17,12 @@ async function getAllAnime(req, res) {
 }
 
 async function searchAnime(req, res) {
-    console.log("GET /api/anime/search", req.query);
+    console.log("GET /anime/search", req.query);
     try {
         const { title } = req.query;
-        const { data } = await spring.get("/anime/search", { params: { title } });
-        res.json(data);
+        const response = await spring.get("/anime/search", { params: { title } });
+
+        res.render("pages/anime", { title: "Anime Results", query: title, results: response.data });
     } catch (error) {
         console.error("Spring GET /anime/search failed:", error.message);
         res.status(502).json({ error: "SQL satellite unavailable" });

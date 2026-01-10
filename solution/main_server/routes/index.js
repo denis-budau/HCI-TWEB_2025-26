@@ -38,7 +38,7 @@ router.get('/error', (req, res) => {
     res.render('pages/error', { title: 'Error Occurred' });
 });
 
-
+/*
 //todo add swagger
 router.get("/anime", (req, res) => {
     res.render("pages/anime", {
@@ -46,6 +46,6 @@ router.get("/anime", (req, res) => {
         query: req.query.title || ""
     });
 });
-
+*/
 
 module.exports = router;

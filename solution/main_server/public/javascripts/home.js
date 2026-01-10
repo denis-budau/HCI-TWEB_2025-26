@@ -1,14 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const btn = document.getElementById("searchBtn");
+    const form = document.getElementById("searchForm");
     const input = document.getElementById("searchInput");
 
-    if (!btn || !input) return;
+    if (!form || !input) return;
 
-    btn.addEventListener("click", () => {
+    form.addEventListener("submit", (e) => {
+        e.preventDefault(); // ❌ blocca il submit
         const query = input.value.trim();
         if (!query) return;
 
-        // Navigate to anime results page (Pattern B)
-        window.location.href = `/anime?title=${encodeURIComponent(query)}`;
+        // Navigate to anime results page
+        window.location.href = `/anime/search?title=${encodeURIComponent(query)}`;
     });
 });

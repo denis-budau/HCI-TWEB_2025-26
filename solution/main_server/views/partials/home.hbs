@@ -4,10 +4,19 @@
 
         <div class="row justify-content-center mt-4">
             <div class="col-md-6">
-                <div class="input-group">
-                    <input type="text" id="searchInput" class="form-control form-control-lg" placeholder="Search for an anime (e.g. Naruto)...">
-                    <button id="searchBtn" class="btn btn-warning btn-lg" type="button">Search</button>
-                </div>
+                <form id="searchForm" role="search">
+                    <div class="input-group">
+                        <input
+                                id="searchInput" name="query" type="text" class="form-control form-control-lg w-50"
+                                placeholder="Type a name...">
+                        <select id="searchType" class="form-select form-select-lg w-25" aria-label="Select type">
+                            <option value="anime" selected>Anime</option>
+                            <option value="character">Character</option>
+                            <option value="person">Person</option>
+                        </select>
+                        <button class="btn btn-dark btn-lg" type="submit">Search</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
