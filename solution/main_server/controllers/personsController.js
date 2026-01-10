@@ -8,8 +8,8 @@ const spring = axios.create({
 async function getAllPersons(req, res) {
     console.log("GET /api/persons");
     try {
-        const { data } = await spring.get("/persons");
-        res.json(data);
+        const response = await spring.get("/persons");
+        res.json(response.data);
     } catch (error) {
         console.error("Spring GET /persons failed:", error.message);
         res.status(502).json({ error: "SQL satellite unavailable" });
@@ -20,8 +20,8 @@ async function searchPersons(req, res) {
     console.log("GET /api/persons/search", req.query);
     try {
         const { name } = req.query;
-        const { data } = await spring.get("/persons/search", { params: { name } });
-        res.json(data);
+        const response = await spring.get("/persons/search", { params: name });
+        res.json(response.data);
     } catch (error) {
         console.error("Spring GET /persons/search failed:", error.message);
         res.status(502).json({ error: "SQL satellite unavailable" });

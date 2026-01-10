@@ -56,6 +56,7 @@ public class DetailsController {
             )
             @RequestParam String title
     ) {
+        System.out.println("Spring received search request: " + title);
         return service.searchByTitle(title);
     }
 
@@ -73,7 +74,7 @@ public class DetailsController {
                     )
             )
     })
-    @GetMapping
+    @GetMapping("/getAllAnime")
     public List<Details> getAllAnime() {
         return service.findAll();
     }

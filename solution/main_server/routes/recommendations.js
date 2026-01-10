@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const recommendationsController = require("../controllers/recommendationsController");
 
-router.get("/recommendations", recommendationsController.getRecommendations);
-router.get("/recommendations/of/:mal_id", recommendationsController.getRecommendationsOfAnime);
+router.get("/getAllRecommendations", recommendationsController.getRecommendations);
+router.get("/:mal_id", recommendationsController.getRecommendationsAnime);
 
 module.exports = router;
