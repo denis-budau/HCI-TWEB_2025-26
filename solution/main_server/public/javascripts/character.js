@@ -8,25 +8,25 @@ document.addEventListener("DOMContentLoaded", () => {
     const grid = document.getElementById("resultsGrid");
     const emptyState = document.getElementById("emptyState");
 
-    const card = document.getElementById("animeCardTemplate");
+    const card = document.getElementById("characterCardTemplate");
 
-    // If the page was opened with ?title=...
+    // If the page was opened with ?name=...
     const params = new URLSearchParams(window.location.search);
-    const initialTitle = params.get("title") || input?.value || "";
+    const initialName = params.get("name") || input?.value || "";
 
-    function renderCard(anime) {
+    /*todo change parameters to match with characters*/
+    function renderCard(character) {
         const clone = card.content.cloneNode(true);
 
-        clone.querySelector(".card-title").textContent = anime.title;
-        clone.querySelector(".card-score").textContent = anime.score ? `⭐ ${anime.score}` : "⭐ no score";
-        clone.querySelector(".card-genres").textContent = anime.genres;
-        clone.querySelector(".card-img-top").src = anime.imageUrl;
+        clone.querySelector(".card-name").textContent = character.name;
+        clone.querySelector(".card-favorites").textContent = character.favorites;
+        clone.querySelector(".card-img-top").src = character.image;
 
         return clone;
     }
 
-    async function AxiosAndRender(title) {
-        const inputValue = (title || "").trim();
+    async function AxiosAndRender(name) {
+        const inputValue = (name || "").trim();
 
         // Reset UI
         grid.innerHTML = "";
@@ -36,13 +36,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!inputValue) {
             emptyState.style.display = "block"
-            emptyState.querySelector(".fw-semibold").textContent = "Type a title to search";
+            emptyState.querySelector(".fw-semibold").textContent = "Type a name to search";
             return;
         }
 
         status.style.display = "block"
 
-        axios.get("/api/anime/search", {params: {title: inputValue}})
+        axios.get("/api/character/search", {params: {name: inputValue}})
             .then(function (res) {
                 const results = Array.isArray(res.data) ? res.data : [];
 
@@ -55,28 +55,28 @@ document.addEventListener("DOMContentLoaded", () => {
                     return;
                 }
 
-                results.forEach(function (anime) {
-                    const cardNode = renderCard(anime);
+                results.forEach(function (character) {
+                    const cardNode = renderCard(character);
                     grid.appendChild(cardNode);
                 });
             })
             .catch(function (error) {
-                console.error("Error fetching anime:", error);
+                console.error("Error fetching character:", error);
                 location.href = "/error";
             });
     }
 
-        // Submit should navigate (keeps URLs shareable / refreshable)
+    // Submit should navigate (keeps URLs shareable / refreshable)
     if (form) {
         form.addEventListener("submit", (e) => {
             e.preventDefault();
             const inputValue = input.value.trim();
-            window.location.href = `/anime/search?title=${encodeURIComponent(inputValue)}`;
+            window.location.href = `/character/search?name=${encodeURIComponent(inputValue)}`;
         });
     }
 
-    // Auto-run search if ?title=... is present
-    if (initialTitle.trim()) {
-        AxiosAndRender(initialTitle);
+    // Auto-run search if ?name=... is present
+    if (initialName.trim()) {
+        AxiosAndRender(initialName);
     }
 });

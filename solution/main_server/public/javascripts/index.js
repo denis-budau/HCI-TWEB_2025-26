@@ -1,3 +1,4 @@
+/* this is duplicate code from anime.js
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("searchForm");
     const input = document.getElementById("searchInput");
@@ -13,3 +14,4 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = `/anime/search?title=${encodeURIComponent(query)}`;
     });
 });
+ */
