@@ -1,15 +1,15 @@
 body {
-  padding: 10px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: #994444;
-}
-   /* Forza tutte le immagini delle card a 200x300px */
-.anime-img {
-   width: 100%;      /* occuperà tutta la larghezza della card */
-   height: 300px;    /* altezza fissa */
-   object-fit: cover; /* taglia/ritaglia l'immagine senza distorcerla */
+  background-color: #aa1212;
 }
 
-.hero-section { background: linear-gradient(135deg, #710202 0%, #712e11 100%); color: white; padding: 4rem 0; }
+   /* Forces all the card images to a fixed size: 200x300px */
+.anime-img {
+   width: 100%;
+   height: 300px;
+   object-fit: cover; /* cut the image without resizing it */
+}
+
+.hero-section {color: white; padding: 4rem 0; }
 .anime-card { transition: transform 0.2s; cursor: pointer; }
 .anime-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
