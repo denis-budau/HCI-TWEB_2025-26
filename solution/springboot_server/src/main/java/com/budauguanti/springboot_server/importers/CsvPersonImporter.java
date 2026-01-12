@@ -63,6 +63,7 @@ public class CsvPersonImporter implements CommandLineRunner {
             p.setImageUrl(record.get("image_url"));
 
             p.setName(record.get("name"));
+            p.setRelevantLocation(record.get("relevant_location"));
             p.setGivenName(record.get("given_name"));
             p.setFamilyName(record.get("family_name"));
 

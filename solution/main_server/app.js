@@ -8,7 +8,10 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const userProfileRouter = require('./routes/userProfile');
 const ratingsRouter = require('./routes/ratings');
-const animeRouter = require('./routes/anime');
+const searchRouter = require('./routes/search');
+const apiAnimeRouter = require('./routes/apiAnime');
+const apiPersonRouter = require('./routes/apiPerson');
+const apiCharacterRouter = require('./routes/apiCharacter');
 const favsRouter = require('./routes/favs');
 const recommendationsRouter = require('./routes/recommendations');
 
@@ -42,8 +45,10 @@ app.use('/userProfile', userProfileRouter);
 app.use('/ratings', ratingsRouter)
 app.use('/favs', favsRouter);
 app.use('/recommendations', recommendationsRouter);
-app.use('/anime', animeRouter);
-
+app.use('/search', searchRouter)
+app.use('/api/anime', apiAnimeRouter);
+app.use('/api/character', apiCharacterRouter);
+app.use('/api/person', apiPersonRouter);
 
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');

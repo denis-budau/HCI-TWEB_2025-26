@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const animeController = require("../controllers/animeController");
+const animeController = require("../controllers/apiAnimeController");
 /**
  * @swagger
  * tags:
@@ -19,7 +19,7 @@ const animeController = require("../controllers/animeController");
  *       200:
  *         description: List of anime
  */
-router.get("/getAllAnime", animeController.getAllAnime);
+router.get("/", animeController.getAllAnime);
 
 /**
  * @swagger

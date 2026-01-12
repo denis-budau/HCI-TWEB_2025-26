@@ -19,7 +19,7 @@ import java.util.List;
         description = "Endpoints to retrieve person data stored in PostgreSQL"
 )
 @RestController
-@RequestMapping("/persons")
+@RequestMapping("api/person")
 public class PersonController {
 
     private final PersonService service;

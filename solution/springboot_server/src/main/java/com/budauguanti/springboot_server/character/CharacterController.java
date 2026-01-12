@@ -21,7 +21,7 @@ import java.util.List;
         description = "Endpoints to retrieve anime characters stored in PostgreSQL"
 )
 @RestController
-@RequestMapping("/character")
+@RequestMapping("api/character")
 public class CharacterController {
 
     private final CharacterService service;

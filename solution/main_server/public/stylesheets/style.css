@@ -10,6 +10,14 @@ body {
    object-fit: cover; /* cut the image without resizing it */
 }
 
+.person-img {
+    width: 100%;
+    height: 300px;
+    object-fit: contain; /* mantiene proporzioni e mostra tutta l'immagine */
+    background-color: black; /* opzionale, per riempire lo spazio vuoto */
+}
+
+
 /*todo use these*/
 .anime-card { transition: transform 0.2s; cursor: pointer; }
 .anime-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }

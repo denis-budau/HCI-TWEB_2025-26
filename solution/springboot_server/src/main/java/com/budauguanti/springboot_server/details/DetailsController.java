@@ -18,7 +18,7 @@ import java.util.List;
         description = "Endpoints to retrieve anime details stored in PostgreSQL"
 )
 @RestController
-@RequestMapping("/anime")
+@RequestMapping("api/anime")
 public class DetailsController {
 
     private final DetailsService service;
@@ -71,7 +71,7 @@ public class DetailsController {
                     )
             )
     })
-    @GetMapping("/getAllAnime")
+    @GetMapping
     public List<Details> getAllAnime() {
         return service.findAll();
     }

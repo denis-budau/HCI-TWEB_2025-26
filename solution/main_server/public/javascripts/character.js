@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+/*document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("searchForm");
     const input = document.getElementById("searchInput");
 
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
     const initialName = params.get("name") || input?.value || "";
 
-    /*todo change parameters to match with characters*/
+
     function renderCard(character) {
         const clone = card.content.cloneNode(true);
 
@@ -79,4 +79,4 @@ document.addEventListener("DOMContentLoaded", () => {
     if (initialName.trim()) {
         AxiosAndRender(initialName);
     }
-});
+});*/
