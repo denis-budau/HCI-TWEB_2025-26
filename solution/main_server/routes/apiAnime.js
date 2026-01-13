@@ -4,8 +4,8 @@ const animeController = require("../controllers/apiAnimeController");
 /**
  * @swagger
  * tags:
- *   - name: SQL Satellite Proxy
- *     description: Main server endpoints that proxy the Spring Boot SQL satellite (port 8082)
+ *   - name: SQL Satellite Proxy - Anime
+ *     description: Main server endpoints that proxy the Spring Boot SQL satellite (port 8082) - anime only routes
  */
 
 
@@ -18,6 +18,8 @@ const animeController = require("../controllers/apiAnimeController");
  *     responses:
  *       200:
  *         description: List of anime
+ *       502:
+ *         description: SQL satellite unavailable
  */
 router.get("/", animeController.getTop50);
 
@@ -37,6 +39,8 @@ router.get("/", animeController.getTop50);
  *     responses:
  *       200:
  *         description: Matching anime
+ *       502:
+ *         description: SQL satellite unavailable
  */
 router.get("/search", animeController.searchAnime);
 
