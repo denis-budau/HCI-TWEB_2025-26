@@ -8,4 +8,6 @@ import java.util.List;
 public interface DetailsRepository extends JpaRepository<Details, Integer> {
     //this will be case-insensitive
     List<Details> findByTitleContainingIgnoreCase(String title);
+
+    List<Details> findTop50ByOrderByRankAsc();
 }

@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
             clone.querySelector(".card-score").textContent = item.score ? `⭐ ${item.score}` : "⭐ no score";
             clone.querySelector(".card-genres").textContent = item.genres;
             clone.querySelector(".anime-img").src = item.imageUrl;
+            clone.querySelector("a").href = `/animedetails?title=${encodeURIComponent(item.title)}`;
         }
 
         if (type === "character") {
@@ -49,6 +50,9 @@ document.addEventListener("DOMContentLoaded", () => {
             clone.querySelector(".card-relevant-location").textContent = item.relevantLocation ? `📍 ${item.relevantLocation}` : "📍 no location";
             clone.querySelector(".person-img").src = item.imageUrl;
         }
+        //const linkNode = clone.querySelector("a");
+        //linkNode.href = `/animedetails?title=${encodeURIComponent(item.title)}`;
+
         return clone;
     }
 

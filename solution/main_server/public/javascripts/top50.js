@@ -7,34 +7,72 @@ document.addEventListener("DOMContentLoaded", () => {
     const emptyState = document.getElementById("emptyState");
 
     const AnimeCard = document.getElementById("animeCardTemplate");
+    const CharacterCard = document.getElementById("characterCardTemplate");
+    const PersonCard = document.getElementById("personCardTemplate");
 
-    document.getElementById("pageTitle").innerText = "TOP 50 ANIME";
+    // Leggi il parametro ?type=...
+    const params = new URLSearchParams(window.location.search);
+    const type = params.get("type") || "anime"; // default: anime
 
-    function renderCard(anime) {
-        // Clona il template
-        const clone = AnimeCard.content.cloneNode(true);
+    // Imposta il titolo della pagina
+    const pageTitle = document.getElementById("pageTitle");
+    if (type === "anime") pageTitle.innerText = "TOP 50 ANIME";
+    else if (type === "character") pageTitle.innerText = "TOP 50 CHARACTERS";
+    else if (type === "person") pageTitle.innerText = "TOP 50 PERSONS";
 
-        clone.querySelector(".card-title").textContent = anime.title;
+    function renderCard(item, position) {
+        let template;
+        if (type === "anime") template = AnimeCard;
+        else if (type === "character") template = CharacterCard;
+        else if (type === "person") template = PersonCard;
 
-        const rankNode = clone.querySelector(".rank-circle");
-        rankNode.textContent = anime.rank;
+        const clone = template.content.cloneNode(true);
 
-        clone.querySelector(".card-score").textContent = anime.score ? `⭐ ${anime.score}` : "⭐ no score";
-        clone.querySelector(".card-genres").textContent = anime.genres;
-        clone.querySelector(".anime-img").src = anime.imageUrl;
-
-        const linkNode = clone.querySelector("a");
-        linkNode.href = `/animedetails?title=${encodeURIComponent(anime.title)}`;
-
+        if (type === "anime") {
+            clone.querySelector(".card-title").textContent = item.title;
+            // Gli anime usano il rank nativo del DB
+            clone.querySelector(".rank-circle").textContent = item.rank || "N/A";
+            clone.querySelector(".card-score").textContent = item.score ? `⭐ ${item.score}` : "⭐ no score";
+            clone.querySelector(".card-genres").textContent = item.genres;
+            clone.querySelector(".anime-img").src = item.imageUrl;
+            clone.querySelector("a").href = `/animedetails?title=${encodeURIComponent(item.title)}`;
+        }
+        else if (type === "character") {
+            clone.querySelector(".card-title").textContent = item.name;
+            // Usiamo la posizione calcolata (1, 2, 3...)
+            clone.querySelector(".rank-circle").textContent = position;
+            clone.querySelector(".card-name_kanji").textContent = item.name_kanji || "";
+            clone.querySelector(".card-favorites").textContent = item.favorites ? `❤️ ${item.favorites}` : "❤️ 0";
+            clone.querySelector(".character-img").src = item.imageUrl;
+        }
+        else if (type === "person") {
+            clone.querySelector(".card-title").textContent = item.name;
+            // Usiamo la posizione calcolata (1, 2, 3...)
+            clone.querySelector(".rank-circle").textContent = position;
+            clone.querySelector(".card-favorites").textContent = item.favorites ? `❤️ ${item.favorites}` : "❤️ 0";
+            clone.querySelector(".card-relevant-location").textContent = item.relevantLocation ? `📍 ${item.relevantLocation}` : "📍 no location";
+            clone.querySelector(".person-img").src = item.imageUrl;
+        }
         return clone;
     }
 
     // Fetch Top 50 dal server
-    axios.get("/api/anime")
+    axios.get(`/api/${type}`)
         .then(res => {
             const top50 = res.data;
-            top50.forEach(anime => {
-                const cardNode = renderCard(anime);
+            if (!top50 || top50.length === 0) {
+                if (emptyState) emptyState.style.display = "block";
+                return;
+            }
+
+            top50.forEach((item, index) => {
+                let cardNode;
+                // Se è anime passiamo solo item, altrimenti passiamo anche la posizione
+                if (type === "anime") {
+                    cardNode = renderCard(item);
+                } else {
+                    cardNode = renderCard(item, index + 1);
+                }
                 grid.appendChild(cardNode);
             });
         })

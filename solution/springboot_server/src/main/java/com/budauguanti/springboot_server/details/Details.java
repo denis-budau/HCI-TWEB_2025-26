@@ -68,9 +68,11 @@ public class Details {
     @Column(columnDefinition = "TEXT")
     private String streaming;
 
+    @Column(columnDefinition = "TEXT")
+    private Integer episodes;
+
     private String source;
     private String rating;
-    private Integer episodes;
     private String season;
     private Integer year;
 

@@ -75,17 +75,8 @@ public class DetailsController {
 
     @GetMapping
     public List<Details> getTop50() {
-        List<Details> allAnime = service.findAll();
-
-        // ordina per rank crescente, trattando i null come ultimi
-        allAnime.sort(Comparator.comparingDouble(d -> d.getRank() != null ? d.getRank() : Double.MAX_VALUE));
-
-        // prendi i primi 50 o tutti se meno
-        int end = Math.min(allAnime.size(), 50);
-        return allAnime.subList(0, end);
+        return service.getTop50ByRank();
     }
-
-
 
     @GetMapping("/{malId}")
     public Details getByMalId(@PathVariable int malId) {

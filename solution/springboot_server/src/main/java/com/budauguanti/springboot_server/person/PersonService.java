@@ -18,5 +18,8 @@ public class PersonService {
         return repository.findByNameContainingIgnoreCase(person);
     }
 
-    public List<Person> findAll() {return repository.findAll(); }
+    // Metodo per ottenere i primi 50 ordinati direttamente dal Database
+    public List<Person> getTop50ByFavorites() {
+        return repository.findTop50ByOrderByFavoritesDesc();
+    }
 }

@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const score = document.getElementById("cardScore");
     const genres = document.getElementById("cardGenres")
     const animeImg = document.getElementById("animeImg");
-    const episode = document.getElementById("cardEpisode");
+    const episodes = document.getElementById("cardEpisode");
     const studios = document.getElementById("cardStudios")
     const producer = document.getElementById("cardProducer");
 
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
             titleJapanese.textContent = anime.titleJapanese ? anime.titleJapanese : "no title Japanese";
             score.textContent = "Score: " + (anime.score ? anime.score : "no score");
             genres.textContent = "Genres: " + (anime.genres ? anime.genres : "no genres");
-            episode.textContent = "Episode: " + (anime.episode ? anime.episode : "no episode");
+            episodes.textContent = "Episodes: " + (anime.episodes ? anime.episodes : "no episode");
             studios.textContent = "Studios: " + (anime.studios ? anime.studios : "no studios");
             producer.textContent = "Producer: " + (anime.producer ? anime.producer : "no producer");
             animeImg.src = anime.imageUrl;

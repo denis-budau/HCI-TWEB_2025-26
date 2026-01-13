@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Tag(
@@ -72,8 +73,10 @@ public class PersonController {
             ),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
+
+
     @GetMapping
-    public List<Person> getAllPersons() {
-        return service.findAll();
+    public List<Person> get50Person() {
+        return service.getTop50ByFavorites(); // Chiama il nuovo metodo del repository
     }
 }

@@ -24,5 +24,7 @@ public class DetailsService {
                 .orElseThrow(() -> new RuntimeException("Anime not found: " + malId));
     }
 
-    public List<Details> findAll() {return repository.findAll(); } // repository estende JpaRepository
+    public List<Details> getTop50ByRank() {
+        return repository.findTop50ByOrderByRankAsc();
+    }
 }

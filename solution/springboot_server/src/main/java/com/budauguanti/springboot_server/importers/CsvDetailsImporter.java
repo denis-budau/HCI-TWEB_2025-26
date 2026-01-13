@@ -62,6 +62,7 @@ public class CsvDetailsImporter implements CommandLineRunner {
             d.setRank(parseDouble(record.get("rank")));
             d.setScore(parseDouble(record.get("score")));
             d.setEpisodes(parseInteger(record.get("episodes")));
+            d.setDemographics(record.get("demographics"));
             d.setImageUrl(record.get("image_url"));
             d.setSynopsis(record.get("synopsis"));
             //todo extend if more fields needed
