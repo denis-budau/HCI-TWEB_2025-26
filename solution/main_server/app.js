@@ -6,7 +6,7 @@ const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const userProfileRouter = require('./routes/userProfile');
+const apiUserProfileRouter = require('./routes/apiUserProfile');
 const searchRouter = require('./routes/search');
 const apiAnimeRouter = require('./routes/apiAnime');
 const apiPersonRouter = require('./routes/apiPerson');
@@ -43,7 +43,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/userProfile', userProfileRouter);
+//app.use('/userProfile', userProfileRouter);
 app.use('/ratings', ratingsRouter)
 app.use('/favs', favsRouter);
 app.use('/recommendations', recommendationsRouter);
@@ -52,6 +52,7 @@ app.use('/search', searchRouter)
 app.use('/api/anime', apiAnimeRouter);
 app.use('/api/character', apiCharacterRouter);
 app.use('/api/person', apiPersonRouter);
+app.use('/api/userProfile', apiUserProfileRouter);
 app.use('/animedetails', animeDetailsRouter);
 
 const swaggerJSDoc = require('swagger-jsdoc');

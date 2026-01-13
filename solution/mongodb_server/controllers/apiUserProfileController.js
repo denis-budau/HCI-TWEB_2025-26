@@ -15,6 +15,23 @@ async function getAllUser (req, res) {
     }
 };
 
+async function get50User(req, res) {
+    try {
+        const users = await userProfileModel.find({
+            // Questo filtro è fondamentale:
+            // Salta tutti i documenti dove 'completed' non esiste o è null
+            completed: { $exists: true, $ne: null }
+        })
+            .sort({ completed: -1 }) // Ordina dal più grande al più piccolo
+            .limit(50);              // Prendi i primi 50 della classifica
+
+        res.status(200).json(users);
+    } catch (error) {
+        console.error("Errore:", error);
+        res.status(500).json({ error: error.message });
+    }
+}
+
 // Metodo per comunicare con il db per utente specifico
 async function getUser (req, res) {
     try {
@@ -30,4 +47,4 @@ async function getUser (req, res) {
     }
 }
 
-module.exports = {getAllUser, getUser};
+module.exports = {getAllUser, get50User, getUser};

@@ -2,25 +2,24 @@ const axios = require("axios");
 
 const mongo = axios.create({
     baseURL: "http://localhost:3001", // Mongo satellite port
-    timeout: 5000,
 });
 
-async function getAllUser(req, res) {
-    console.log('GET /userProfile/getAllUser');
+async function get50User(req, res) {
+    console.log('GET api/userProfile/');
     try {
-        const response = await mongo.get("/userProfile/getAllUser");
+        const response = await mongo.get("api/userProfile/");
         res.json(response.data);
     } catch (err) {
-        console.error("Mongo GET /userProfile failed:", err.message);
+        console.error("Mongo GET api/userProfile failed:", err.message);
         res.status(502).json({ error: "NoSQL satellite unavailable" });
     }
 }
 
 async function getUser(req, res) {
-    console.log('GET /userProfile/', req.params);
+    console.log('GET api/userProfile/', req.params);
     try {
         const { username } = req.params;
-        const response = await mongo.get(`/userProfile/${username}`);
+        const response = await mongo.get(`api/userProfile/${username}`);
         res.json(response.data);
     } catch (error) {
         console.error("Mongo GET /userProfile/${username} failed:", err.message);
@@ -28,4 +27,4 @@ async function getUser(req, res) {
     }
 }
 
-module.exports = {getAllUser, getUser};
+module.exports = {get50User, getUser};

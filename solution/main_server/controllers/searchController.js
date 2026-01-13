@@ -1,6 +1,5 @@
 async function searchPage(req, res) {
     try {
-        // const response = await spring.get("/anime/search", { params: { title } });
         const title = req.query.title || "";
         const type = req.query.type || "anime"; // default a anime se non passato
         res.render("pages/search", { title: "Search Results", query: title, type });

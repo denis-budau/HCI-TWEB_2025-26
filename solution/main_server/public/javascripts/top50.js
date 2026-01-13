@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const AnimeCard = document.getElementById("animeCardTemplate");
     const CharacterCard = document.getElementById("characterCardTemplate");
     const PersonCard = document.getElementById("personCardTemplate");
+    const UserCard = document.getElementById("userCardTemplate");
 
     // Leggi il parametro ?type=...
     const params = new URLSearchParams(window.location.search);
@@ -17,14 +18,16 @@ document.addEventListener("DOMContentLoaded", () => {
     // Imposta il titolo della pagina
     const pageTitle = document.getElementById("pageTitle");
     if (type === "anime") pageTitle.innerText = "TOP 50 ANIME";
-    else if (type === "character") pageTitle.innerText = "TOP 50 CHARACTERS";
-    else if (type === "person") pageTitle.innerText = "TOP 50 PERSONS";
+    else if (type === "character") pageTitle.innerText = "TOP 50 CHARACTER";
+    else if (type === "person") pageTitle.innerText = "TOP 50 PERSON";
+    else if (type === "userProfile") pageTitle.innerText = "TOP 50 USER";
 
     function renderCard(item, position) {
         let template;
         if (type === "anime") template = AnimeCard;
         else if (type === "character") template = CharacterCard;
         else if (type === "person") template = PersonCard;
+        else if (type === "userProfile") template = UserCard;
 
         const clone = template.content.cloneNode(true);
 
@@ -52,6 +55,15 @@ document.addEventListener("DOMContentLoaded", () => {
             clone.querySelector(".card-favorites").textContent = item.favorites ? `❤️ ${item.favorites}` : "❤️ 0";
             clone.querySelector(".card-relevant-location").textContent = item.relevantLocation ? `📍 ${item.relevantLocation}` : "📍 no location";
             clone.querySelector(".person-img").src = item.imageUrl;
+        }
+
+        else if (type === "userProfile") {
+            clone.querySelector(".card-title").textContent = item.name;
+            // Usiamo la posizione calcolata (1, 2, 3...)
+            clone.querySelector(".rank-circle").textContent = position;
+            clone.querySelector(".card-location").textContent = item.location ? `📍 ${item.location}` : "📍 no location";
+            clone.querySelector(".card-joined").textContent = item.joined ? ` ${item.joined}` : " no joined data";
+            clone.querySelector(".completed").textContent = item.completed;
         }
         return clone;
     }

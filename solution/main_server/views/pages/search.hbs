@@ -6,9 +6,13 @@
 <main class="container my-4">
 
     <!-- Page header -->
+    <div class="page-header mb-4 pb-3 border-bottom">
+        <div class="d-flex justify-content-center">
+            <h3 id="pageTitle" class="fw-bold mb-1 text-center"></h3>
+        </div>
+    </div>
     <div class="d-flex flex-column flex-md-row align-items-md-end justify-content-between gap-3 mb-3">
         <div>
-            <h3 id="pageTitle"></h3>
             <p class="text-muted mb-0">
                 Results for:
                 {{#if query}}
