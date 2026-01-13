@@ -17,17 +17,40 @@ async function getAllUser (req, res) {
 
 async function get50User(req, res) {
     try {
-        const users = await userProfileModel.find({
-            // Questo filtro è fondamentale:
-            // Salta tutti i documenti dove 'completed' non esiste o è null
-            completed: { $exists: true, $ne: null }
-        })
-            .sort({ completed: -1 }) // Ordina dal più grande al più piccolo
-            .limit(50);              // Prendi i primi 50 della classifica
+        const users = await userProfileModel.aggregate([
+            { $match: { completed: { $exists: true, $ne: null } } },
 
+            // normalize completed into a number (we could have checked with pandas better,
+            // but we have some values in MongoDB stored as strings, such as 2,899)
+
+            {
+                $addFields: {
+                    completedStr: { $toString: "$completed" }
+                }
+            },
+            {
+                $addFields: {
+                    completedClean: {
+                        $replaceAll: { input: "$completedStr", find: ",", replacement: "" }
+                    }
+                }
+            },
+            {
+                $addFields: {
+                    completedNum: {
+                        $convert: { input: "$completedClean", to: "int", onError: null, onNull: null }
+                    }
+                }
+            },
+
+            { $match: { completedNum: { $ne: null } } },
+            { $sort: { completedNum: -1 } },
+            { $limit: 50 },
+            { $project: { _id: 0, id: 1, username: 1, location: 1, completed: 1, completedNum: 1 } }
+        ]);
         res.status(200).json(users);
     } catch (error) {
-        console.error("Errore:", error);
+        console.error("Error:", error);
         res.status(500).json({ error: error.message });
     }
 }

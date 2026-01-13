@@ -44,26 +44,26 @@ document.addEventListener("DOMContentLoaded", () => {
             clone.querySelector(".card-title").textContent = item.name;
             // Usiamo la posizione calcolata (1, 2, 3...)
             clone.querySelector(".rank-circle").textContent = position;
-            clone.querySelector(".card-favorites").textContent = item.favorites ? `❤️ ${item.favorites}` : "❤️ 0";
+            clone.querySelector(".card-favorites").textContent = item.favorites ? `❤️ ${item.favorites}` : "💔 0";
             clone.querySelector(".character-img").src = item.image;
         }
         else if (type === "person") {
             clone.querySelector(".card-title").textContent = item.name;
             // Usiamo la posizione calcolata (1, 2, 3...)
             clone.querySelector(".rank-circle").textContent = position;
-            clone.querySelector(".card-favorites").textContent = item.favorites ? `❤️ ${item.favorites}` : "❤️ 0";
+            clone.querySelector(".card-favorites").textContent = item.favorites ? `❤️ ${item.favorites}` : "💔 0";
             clone.querySelector(".card-relevant-location").textContent = item.relevantLocation ? `📍 ${item.relevantLocation}` : "📍 no location";
             clone.querySelector(".person-img").src = item.imageUrl;
         }
 
         else if (type === "userProfile") {
-            clone.querySelector(".card-title").textContent = item.name;
-            // Usiamo la posizione calcolata (1, 2, 3...)
+            clone.querySelector(".card-title").textContent = item.username || "no username";
             clone.querySelector(".rank-circle").textContent = position;
             clone.querySelector(".card-location").textContent = item.location ? `📍 ${item.location}` : "📍 no location";
-            clone.querySelector(".card-joined").textContent = item.joined ? ` ${item.joined}` : " no joined data";
-            clone.querySelector(".completed").textContent = item.completed;
+            clone.querySelector(".card-completed").textContent = item.completed ? `Completed: ${item.completed}` : "Completed: 0";
+            clone.querySelector(".card-dropped").textContent = item.watching ? `Dropped: ${item.watching}` : "Dropped: 0";
         }
+
         return clone;
     }
 
