@@ -1,64 +1,66 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/stylesheets/style.css" rel="stylesheet">
 <script src="/javascripts/animeDetails.js"></script>
 
-<!-- <input type="hidden" id="malId" value=""> -->
-<main class="container my-4">
+<main class="white-text container my-4">
 
-    <!-- Top area: image + title + quick stats -->
+    <!-- Row principale: poster + colonna destra -->
     <div class="row g-4 align-items-start">
 
-        <!-- Left: poster -->
+        <!-- Poster a sinistra -->
         <div class="col-12 col-md-4 col-lg-3">
-            <div class="card">
-                <img id="animePoster" src="" alt="" class="img-fluid anime-img rounded">
+            <div class="card anime-card mt-5">
+                <img id="animeImg" src="" alt="Anime Poster" class="img-fluid anime-img rounded">
             </div>
         </div>
 
-        <!-- Center/right: title + info -->
+        <!-- Colonna centrale/destra: titolo + info + genres + synopsis -->
         <div class="col-12 col-md-8 col-lg-9">
 
-            <!-- Big centered title -->
+            <!-- Titolo -->
             <div class="text-center text-md-start mb-3">
-                <h1 class="title-name display-6 fw-bold mb-1">gnaaam</h1>
-                <div class="japan-name text-muted">japanese</div>
+                <h1 id="title" class="title-name display-6 fw-bold mb-1"></h1>
+                <div id="titleJapanese" class=""></div>
             </div>
 
-            <!-- Info cards -->
+            <!-- Info + Genres affiancati -->
             <div class="row g-3">
 
                 <div class="col-12 col-lg-6">
                     <div class="border rounded p-3 h-100">
                         <div class="fw-semibold mb-2">Info</div>
-
-                        <div class="score mb-1"><span class="text-muted">Score:</span></div>
-                        <div class="episodes mb-1"><span class="text-muted">Episodes:</span></div>
-                        <div class="studios mb-1"><span class="text-muted">Studios:</span></div>
-                        <div class="producers mb-1"><span class="text-muted">Producers:</span></div>
+                        <div id="cardScore" class="mb-1"></div>
+                        <div id="cardEpisode" class="episodes mb-1"></div>
+                        <div id="cardStudios" class="studios mb-1"></div>
+                        <div id="cardProducer" class="producers mb-1"></div>
                     </div>
                 </div>
 
                 <div class="col-12 col-lg-6">
                     <div class="border rounded p-3 h-100">
                         <div class="fw-semibold mb-2">Genres</div>
-                        <div class="genres"></div>
+                        <div id="cardGenres" class="genres"></div>
                     </div>
                 </div>
 
-            </div>
-        </div>
-    </div>
+            </div> <!-- fine row Info + Genres -->
 
-    <!-- Synopsis section (filled by JS) -->
-    <div class="mt-4">
-        <div class="border rounded p-3">
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="fw-semibold">Synopsis</div>
-                <span id="synopsisStatus" class="text-muted small">Loading...</span>
+            <!-- Synopsis sotto Info + Genres, stessa larghezza della colonna destra -->
+            <div class="mt-4">
+                <div class="border rounded p-3 w-100">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="fw-semibold">Synopsis</div>
+                        <span id="synopsisStatus" class="small">Loading...</span>
+                    </div>
+                    <div id="synopsisText" class="mt-2">
+                        <!-- JS inserirà il testo -->
+                    </div>
+                </div>
             </div>
-            <div id="synopsisText" class="mt-2 text-muted">
-                <!-- JS will fill this -->
-            </div>
-        </div>
-    </div>
+
+        </div> <!-- fine colonna destra -->
+
+    </div> <!-- fine row principale -->
 
 </main>

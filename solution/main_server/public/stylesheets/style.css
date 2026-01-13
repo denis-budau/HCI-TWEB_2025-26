@@ -14,7 +14,7 @@ body {
     width: 100%;
     height: 300px;
     object-fit: contain; /* mantiene proporzioni e mostra tutta l'immagine */
-    background-color: black; /* opzionale, per riempire lo spazio vuoto */
+    background-color: black; /* per riempire lo spazio vuoto */
 }
 .rank-circle {
     width: 60px;
@@ -25,6 +25,10 @@ body {
     background-color: gray;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     z-index: 10;
+}
+.white-text {
+    color: whitesmoke;
+    font-size: 16px;
 }
 
 /*todo use these*/

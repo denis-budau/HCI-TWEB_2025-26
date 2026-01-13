@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
         clone.querySelector(".anime-img").src = anime.imageUrl;
 
         const linkNode = clone.querySelector("a");
-        linkNode.href = `/animedetails?title=${anime.title}`;
+        linkNode.href = `/animedetails?title=${encodeURIComponent(anime.title)}`;
 
         return clone;
     }
