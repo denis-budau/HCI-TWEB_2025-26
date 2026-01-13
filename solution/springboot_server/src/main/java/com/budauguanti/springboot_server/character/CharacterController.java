@@ -1,5 +1,6 @@
 package com.budauguanti.springboot_server.character;
 
+import com.budauguanti.springboot_server.details.Details;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -58,13 +59,13 @@ public class CharacterController {
     }
 
     @Operation(
-            summary = "Get all characters",
-            description = "Returns all characters currently stored in the database."
+            summary = "Get the top 50 characters by favorite (ascending order)",
+            description = "Returns the top 50 characters by favorite (ascending order) currently stored in the database."
     )
     @ApiResponses({
             @ApiResponse(
                     responseCode = "200",
-                    description = "Characters list retrieved successfully",
+                    description = "Top 50 Characters list retrieved successfully",
                     content = @Content(
                             mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = Character.class))
@@ -72,7 +73,7 @@ public class CharacterController {
             )
     })
     @GetMapping
-    public List<Character> getAllCharacters() {
-        return service.findAll();
+    public List<Character> getTop50() {
+        return service.getTop50ByFavorites();
     }
 }

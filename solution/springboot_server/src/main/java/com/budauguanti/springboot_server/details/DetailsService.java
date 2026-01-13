@@ -15,7 +15,7 @@ public class DetailsService {
     }
 
     public List<Details> searchByTitle(String title) {
-        return repository.findByTitleContainingIgnoreCase(title);
+        return repository.findByTitleContainingIgnoreCaseOrderByRankAsc(title);
     }
 
     //public Details findByMalId(int malId) {return repository.findById(malId);}

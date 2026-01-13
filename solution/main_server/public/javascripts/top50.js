@@ -41,9 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
             clone.querySelector(".card-title").textContent = item.name;
             // Usiamo la posizione calcolata (1, 2, 3...)
             clone.querySelector(".rank-circle").textContent = position;
-            clone.querySelector(".card-name_kanji").textContent = item.name_kanji || "";
             clone.querySelector(".card-favorites").textContent = item.favorites ? `❤️ ${item.favorites}` : "❤️ 0";
-            clone.querySelector(".character-img").src = item.imageUrl;
+            clone.querySelector(".character-img").src = item.image;
         }
         else if (type === "person") {
             clone.querySelector(".card-title").textContent = item.name;

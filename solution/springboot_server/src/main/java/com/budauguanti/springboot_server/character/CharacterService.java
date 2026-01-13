@@ -1,5 +1,6 @@
 package com.budauguanti.springboot_server.character;
 
+import com.budauguanti.springboot_server.details.Details;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,8 +16,10 @@ public class CharacterService {
     }
 
     public List<Character> searchByName(String character) {
-        return repository.findByNameContainingIgnoreCase(character);
+        return repository.findByNameContainingIgnoreCaseOrderByFavoritesDesc(character);
     }
 
-    public List<Character> findAll() {return repository.findAll(); }
+    public List<Character> getTop50ByFavorites() {
+        return repository.findTop50ByOrderByFavoritesDesc();
+    }
 }

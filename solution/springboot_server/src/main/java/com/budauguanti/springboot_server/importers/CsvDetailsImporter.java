@@ -12,7 +12,6 @@ import java.util.*;
 
 @Component
 public class CsvDetailsImporter implements CommandLineRunner {
-
     private final DetailsRepository repository;
 
     public CsvDetailsImporter(DetailsRepository repository) {
