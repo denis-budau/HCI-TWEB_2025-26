@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     const status = document.getElementById("statusMessage");
+    const statusText = document.getElementById("statusText");
     const errorBox = document.getElementById("errorMessage");
     const summary = document.getElementById("resultsSummary");
     const grid = document.getElementById("resultsGrid");
@@ -67,29 +68,38 @@ document.addEventListener("DOMContentLoaded", () => {
         return clone;
     }
 
-    // Fetch Top 50 dal server
+// SHOW loading
+    status.classList.remove("d-none");
+    if (statusText) statusText.textContent = "Loading…";
+
+    errorBox.classList.add("d-none");
+    grid.innerHTML = "";
+    if (emptyState) emptyState.classList.add("d-none");
+
     axios.get(`/api/${type}`)
         .then(res => {
+            status.classList.add("d-none"); // HIDE loading
+
             const top50 = res.data;
             if (!top50 || top50.length === 0) {
-                if (emptyState) emptyState.style.display = "block";
+                if (emptyState) emptyState.classList.remove("d-none");
                 return;
             }
 
             top50.forEach((item, index) => {
-                let cardNode;
-                // Se è anime passiamo solo item, altrimenti passiamo anche la posizione
-                if (type === "anime") {
-                    cardNode = renderCard(item);
-                } else {
-                    cardNode = renderCard(item, index + 1);
-                }
+                const cardNode =
+                    (type === "anime")
+                        ? renderCard(item)
+                        : renderCard(item, index + 1);
+
                 grid.appendChild(cardNode);
             });
         })
         .catch(err => {
             console.error(err);
-            errorBox.style.display = "block";
-            errorBox.textContent = "Something went wrong while fetching anime.";
+            status.classList.add("d-none"); // HIDE loading
+
+            errorBox.classList.remove("d-none");
+            errorBox.textContent = "Something went wrong while fetching data.";
         });
 });

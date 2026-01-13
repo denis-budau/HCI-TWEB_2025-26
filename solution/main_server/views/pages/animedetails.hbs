@@ -2,27 +2,25 @@
 <script src="/javascripts/animeDetails.js"></script>
 
 <main class="container">
-
-    <!-- Row principale: poster + colonna destra -->
+    <!-- Main row: poster + right column-->
     <div class="row g-4 align-items-start">
-
-        <!-- Poster a sinistra -->
+        <!-- Left column: poster -->
         <div class="col-12 col-md-4 col-lg-3">
             <div class="card anime-card mt-5">
                 <img id="animeImg" src="" alt="Anime Poster" class="img-fluid anime-img rounded">
             </div>
         </div>
 
-        <!-- Colonna centrale/destra: titolo + info + genres + synopsis -->
+        <!-- Central column/right: title + info + genres + synopsis -->
         <div class="col-12 col-md-8 col-lg-9">
 
-            <!-- Titolo -->
+            <!-- Title -->
             <div class="text-center text-md-start mb-3">
                 <h1 id="title" class="title-name display-6 fw-bold mb-1"></h1>
                 <div id="titleJapanese" class=""></div>
             </div>
 
-            <!-- Info + Genres affiancati -->
+            <!-- Info + Genres next to each other -->
             <div class="row g-3">
 
                 <div class="col-12 col-lg-6">
@@ -42,9 +40,9 @@
                     </div>
                 </div>
 
-            </div> <!-- fine row Info + Genres -->
+            </div> <!-- end row Info + Genres -->
 
-            <!-- Synopsis sotto Info + Genres, stessa larghezza della colonna destra -->
+            <!-- Synopsis below Info + Genres, same width as right column -->
             <div class="mt-4">
                 <div class="border rounded p-3 w-100">
                     <div class="d-flex justify-content-between align-items-center">
@@ -52,13 +50,10 @@
                         <span id="synopsisStatus" class="small">Loading...</span>
                     </div>
                     <div id="synopsisText" class="mt-2">
-                        <!-- JS inserirà il testo -->
+                        <!-- JS will inject the text -->
                     </div>
                 </div>
             </div>
-
-        </div> <!-- fine colonna destra -->
-
-    </div> <!-- fine row principale -->
-
+        </div>
+    </div>
 </main>

@@ -11,7 +11,12 @@
     </div>
 
     <!-- Status / errors -->
-    <div id="statusMessage" class="alert alert-info d-none" role="status">Searching…</div>
+    <div id="statusMessage" class="alert alert-info d-none" role="status">
+        <div class="d-flex justify-content-center align-items-center gap-2">
+            <div class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></div>
+            <span id="statusText">Loading…</span>
+        </div>
+    </div>
 
     <div id="errorMessage" class="alert alert-danger d-none" role="alert">
         Something went wrong while contacting the SQL satellite.
