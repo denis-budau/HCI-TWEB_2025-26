@@ -1,5 +1,7 @@
-/*here we'll have the anime details*/
-<input type="hidden" id="malId" value="{{mal_id}}">
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/javascripts/animeDetails.js"></script>
+
+<!-- <input type="hidden" id="malId" value=""> -->
 <main class="container my-4">
 
     <!-- Top area: image + title + quick stats -->
@@ -8,12 +10,7 @@
         <!-- Left: poster -->
         <div class="col-12 col-md-4 col-lg-3">
             <div class="card">
-                <img
-                        id="animePoster"
-                        src="{{image_url}}"
-                        alt="{{title}}"
-                        class="img-fluid rounded"
-                >
+                <img id="animePoster" src="" alt="" class="img-fluid anime-img rounded">
             </div>
         </div>
 
@@ -22,10 +19,8 @@
 
             <!-- Big centered title -->
             <div class="text-center text-md-start mb-3">
-                <h1 class="display-6 fw-bold mb-1">{{title}}</h1>
-                {{#if title_japanese}}
-                    <div class="text-muted">{{title_japanese}}</div>
-                {{/if}}
+                <h1 class="title-name display-6 fw-bold mb-1">gnaaam</h1>
+                <div class="japan-name text-muted">japanese</div>
             </div>
 
             <!-- Info cards -->
@@ -35,17 +30,17 @@
                     <div class="border rounded p-3 h-100">
                         <div class="fw-semibold mb-2">Info</div>
 
-                        <div class="mb-1"><span class="text-muted">Score:</span> {{score}}</div>
-                        <div class="mb-1"><span class="text-muted">Episodes:</span> {{episodes}}</div>
-                        <div class="mb-1"><span class="text-muted">Studios:</span> {{studios}}</div>
-                        <div class="mb-1"><span class="text-muted">Producers:</span> {{producers}}</div>
+                        <div class="score mb-1"><span class="text-muted">Score:</span></div>
+                        <div class="episodes mb-1"><span class="text-muted">Episodes:</span></div>
+                        <div class="studios mb-1"><span class="text-muted">Studios:</span></div>
+                        <div class="producers mb-1"><span class="text-muted">Producers:</span></div>
                     </div>
                 </div>
 
                 <div class="col-12 col-lg-6">
                     <div class="border rounded p-3 h-100">
                         <div class="fw-semibold mb-2">Genres</div>
-                        <div>{{genres}}</div>
+                        <div class="genres"></div>
                     </div>
                 </div>
 
@@ -67,5 +62,3 @@
     </div>
 
 </main>
-
-<script src="/javascripts/animeDetails.js"></script>

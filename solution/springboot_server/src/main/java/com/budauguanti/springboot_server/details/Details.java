@@ -42,7 +42,7 @@ public class Details {
     @Column(columnDefinition = "TEXT")
     private String synopsis;
 
-    private Integer rank;
+    private Double rank;
     private Integer popularity;
     private Integer members;
     private Integer favorites;
@@ -82,7 +82,7 @@ public class Details {
     }
 
     //generated constructor
-    public Details(Integer malId, String title, String titleJapanese, String url, String imageUrl, String type, String status, Double score, Integer scoredBy, LocalDate startDate, LocalDate endDate, String synopsis, Integer rank, Integer popularity, Integer members, Integer favorites, String genres, String studios, String themes, String demographics, String producers, String licensors, String streaming, String source, String rating, Integer episodes, String season, Integer year, String explicitGenres) {
+    public Details(Integer malId, String title, String titleJapanese, String url, String imageUrl, String type, String status, Double score, Integer scoredBy, LocalDate startDate, LocalDate endDate, String synopsis, Double rank, Integer popularity, Integer members, Integer favorites, String genres, String studios, String themes, String demographics, String producers, String licensors, String streaming, String source, String rating, Integer episodes, String season, Integer year, String explicitGenres) {
         this.malId = malId;
         this.title = title;
         this.titleJapanese = titleJapanese;
@@ -210,11 +210,11 @@ public class Details {
         this.synopsis = synopsis;
     }
 
-    public Integer getRank() {
+    public Double getRank() {
         return rank;
     }
 
-    public void setRank(Integer rank) {
+    public void setRank(Double rank) {
         this.rank = rank;
     }
 

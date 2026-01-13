@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Tag(
@@ -71,10 +72,19 @@ public class DetailsController {
                     )
             )
     })
+
     @GetMapping
-    public List<Details> getAllAnime() {
-        return service.findAll();
+    public List<Details> getTop50() {
+        List<Details> allAnime = service.findAll();
+
+        // ordina per rank crescente, trattando i null come ultimi
+        allAnime.sort(Comparator.comparingDouble(d -> d.getRank() != null ? d.getRank() : Double.MAX_VALUE));
+
+        // prendi i primi 50 o tutti se meno
+        int end = Math.min(allAnime.size(), 50);
+        return allAnime.subList(0, end);
     }
+
 
 
     @GetMapping("/{malId}")

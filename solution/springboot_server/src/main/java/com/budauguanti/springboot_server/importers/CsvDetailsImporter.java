@@ -59,6 +59,7 @@ public class CsvDetailsImporter implements CommandLineRunner {
             d.setStudios(normalizeListField(record.get("studios")));
             d.setProducers(normalizeListField(record.get("producers")));
 
+            d.setRank(parseDouble(record.get("rank")));
             d.setScore(parseDouble(record.get("score")));
             d.setEpisodes(parseInteger(record.get("episodes")));
             d.setImageUrl(record.get("image_url"));

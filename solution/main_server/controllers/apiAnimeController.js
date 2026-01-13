@@ -5,10 +5,10 @@ const spring = axios.create({
     timeout: 5000,
 });
 
-async function getAllAnime(req, res) {
+async function getTop50(req, res) {
     console.log("GET /api/anime");
     try {
-        const response = await spring.get("api/anime");
+        const response = await spring.get("/api/anime");
         res.json(response.data);
     } catch (error) {
         console.error("Spring GET /anime failed:", error.message);
@@ -20,7 +20,7 @@ async function searchAnime(req, res) {
     console.log("GET /api/anime/search", req.query);
     try {
         const { title } = req.query;
-        const response = await spring.get("api/anime/search", { params: { title } });
+        const response = await spring.get("/api/anime/search", { params: { title } });
 
         res.json(response.data);
         // res.render("pages/anime", { title: "Anime Results", query: title, results: response.data });
@@ -30,4 +30,4 @@ async function searchAnime(req, res) {
     }
 }
 
-module.exports = {getAllAnime, searchAnime};
+module.exports = {getTop50, searchAnime};

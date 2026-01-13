@@ -19,19 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const type = params.get("type") || "anime";
     document.getElementById("pageTitle").innerText = (type + " search").toUpperCase();
 
-    /*
-    function renderCard(anime) {
-        const clone = card.content.cloneNode(true);
-
-        clone.querySelector(".card-title").textContent = anime.title;
-        clone.querySelector(".card-score").textContent = anime.score ? `⭐ ${anime.score}` : "⭐ no score";
-        clone.querySelector(".card-genres").textContent = anime.genres;
-        clone.querySelector(".card-img-top").src = anime.imageUrl;
-
-        return clone;
-    }
-    */
-
     function renderCard(item) {
         // Scegli il template giusto in base al tipo
         let cardTemplate;
@@ -94,6 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(function (res) {
                 const results = Array.isArray(res.data) ? res.data : [];
                 console.log(results)
+
 
                 status.style.display = "none";
 

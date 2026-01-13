@@ -19,7 +19,7 @@ const animeController = require("../controllers/apiAnimeController");
  *       200:
  *         description: List of anime
  */
-router.get("/", animeController.getAllAnime);
+router.get("/", animeController.getTop50);
 
 /**
  * @swagger
