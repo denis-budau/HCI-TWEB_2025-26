@@ -30,7 +30,7 @@ public class CsvCharacterImporter implements CommandLineRunner{
 
         // NOTE: IntelliJ runs Spring Boot with working dir = springboot_server,
         // so we go one level up to reach /datasets
-        Path csvPath = Paths.get("..", "datasets", "characters_cleaned.csv");
+        Path csvPath = Paths.get("..","datasets", "characters.csv");
         if (!Files.exists(csvPath)) {
             throw new RuntimeException("CSV not found at: " + csvPath.toAbsolutePath());
         }
@@ -59,7 +59,6 @@ public class CsvCharacterImporter implements CommandLineRunner{
 
             c.setUrl(record.get("url"));
             c.setName(record.get("name"));
-            c.setNameKanji(record.get("name_kanji"));
             c.setImage(record.get("image"));
 
             c.setFavorites(parseInteger(record.get("favorites")));

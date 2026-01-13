@@ -15,9 +15,6 @@ public class Character {
 
     private String name;
 
-    @Column(name = "name_kanji")
-    private String nameKanji;
-
     @Column(columnDefinition = "TEXT")
     private String image;
 
@@ -51,14 +48,6 @@ public class Character {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public String getNameKanji() {
-        return nameKanji;
-    }
-
-    public void setNameKanji(String nameKanji) {
-        this.nameKanji = nameKanji;
     }
 
     public String getName() {

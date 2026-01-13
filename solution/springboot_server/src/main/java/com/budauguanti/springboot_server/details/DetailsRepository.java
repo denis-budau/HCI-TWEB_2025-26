@@ -7,7 +7,7 @@ import java.util.List;
 @Repository
 public interface DetailsRepository extends JpaRepository<Details, Integer> {
     //this will be case-insensitive
-    List<Details> findByTitleContainingIgnoreCase(String title);
+    List<Details> findByTitleContainingIgnoreCaseOrderByRankAsc(String title);
 
     List<Details> findTop50ByOrderByRankAsc();
 }

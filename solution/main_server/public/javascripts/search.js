@@ -39,14 +39,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (type === "character") {
             clone.querySelector(".card-title").textContent = item.name;
-            clone.querySelector(".card-name_kanji").textContent = item.name_kanji;
-            clone.querySelector(".card-favorites").textContent = item.favorites ? `❤️ ${item.favorites}` : "⭐ no favorites";
-            clone.querySelector(".character-img").src = item.imageUrl;
+            clone.querySelector(".card-favorites").textContent = item.favorites ? `❤️ ${item.favorites}` : "💔 no favorites";
+            clone.querySelector(".character-img").src = item.image;
         }
 
         if (type === "person") {
             clone.querySelector(".card-title").textContent = item.name;
-            clone.querySelector(".card-favorites").textContent = item.favorites ? `❤️ ${item.favorites}` : "⭐ no favorites";
+            clone.querySelector(".card-favorites").textContent = item.favorites ? `❤️ ${item.favorites}` : "💔 no favorites";
             clone.querySelector(".card-relevant-location").textContent = item.relevantLocation ? `📍 ${item.relevantLocation}` : "📍 no location";
             clone.querySelector(".person-img").src = item.imageUrl;
         }

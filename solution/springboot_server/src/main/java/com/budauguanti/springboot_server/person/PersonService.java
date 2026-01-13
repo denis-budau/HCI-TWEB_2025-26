@@ -15,7 +15,7 @@ public class PersonService {
     }
 
     public List<Person> searchByName(String person) {
-        return repository.findByNameContainingIgnoreCase(person);
+        return repository.findByNameContainingIgnoreCaseOrderByFavoritesDesc(person);
     }
 
     // Metodo per ottenere i primi 50 ordinati direttamente dal Database
