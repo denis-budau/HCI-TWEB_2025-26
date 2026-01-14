@@ -26,7 +26,7 @@ public class Character {
     private Integer favorites;
 
     @Column(columnDefinition = "TEXT")
-    @Schema(
+        @Schema(
             example = "Naruto Uzumaki is a ninja from Konohagakure...",
             description = "Short character biography"
     )

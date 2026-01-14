@@ -1,15 +1,14 @@
 const ratingModel = require('../models/ratings');
 
-// Metodo per comunicare con il db per ratings di un anime specifico
+// Method to communicate with the database for ratings of a specific anime
 async function getAnimeRatings (req, res) {
     try {
-        const { anime_id } = req.params; // ID dell'anime dalla rotta
-        console.log('➡️ getAnimeRatings: richiesta ricevuta per anime id:', anime_id);
+        const { anime_id } = req.params; // Anime ID got from the route
+        console.log('➡️ getAnimeRatings: request received for anime id:', anime_id);
 
-        // Prendi tutti i rating con animeId uguale a id
         const ratings = await ratingModel.find({ anime_id });
 
-        console.log(`✅ Trovati ${ratings.length} rating`);
+        console.log(`✅ Found ${ratings.length} rating`);
         res.status(200).json(ratings);
 
     }
@@ -18,12 +17,12 @@ async function getAnimeRatings (req, res) {
     }
 }
 
-// Metodo per comunicare con il db per ratings di un utente specifico
+// Method to communicate with the database for a specific user's ratings
 async function getUserRatings (req, res) {
     console.log('🟡 getUserRatings START');
     try {
         const { username } = req.params;
-        console.log('➡️ getUserRatings: richiesta ricevuta per username:', username);
+        console.log('➡️ getUserRatings: request received for username:', username);
 
         const ratings = await ratingModel.find({ username });
 
