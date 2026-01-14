@@ -4,7 +4,7 @@ const mongo = axios.create({
     baseURL: "http://localhost:3001", // Mongo satellite port
 });
 
-async function get50User(req, res) {
+async function getTop50User(req, res) {
     console.log('GET api/userProfile/');
     try {
         const response = await mongo.get("api/userProfile/");
@@ -27,4 +27,4 @@ async function getUser(req, res) {
     }
 }
 
-module.exports = {get50User, getUser};
+module.exports = {getTop50User, getUser};

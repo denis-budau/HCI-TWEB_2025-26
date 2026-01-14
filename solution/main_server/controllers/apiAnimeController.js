@@ -1,17 +1,16 @@
 const axios = require("axios");
 
 const spring = axios.create({
-    baseURL: "http://localhost:8082",
-    timeout: 5000,
+    baseURL: "http://localhost:8082"
 });
 
-async function getTop50(req, res) {
+async function getTop50Anime(req, res) {
     console.log("GET /api/anime");
     try {
         const response = await spring.get("/api/anime");
         res.json(response.data);
     } catch (error) {
-        console.error("Spring GET /anime failed:", error.message);
+        console.error("Spring GET api/anime failed:", error.message);
         res.status(502).json({ error: "SQL satellite unavailable" });
     }
 }
@@ -25,9 +24,9 @@ async function searchAnime(req, res) {
         res.json(response.data);
         // res.render("pages/anime", { title: "Anime Results", query: title, results: response.data });
     } catch (error) {
-        console.error("Spring GET /anime/search failed:", error.message);
+        console.error("Spring GET api/anime/search failed:", error.message);
         res.status(502).json({ error: "SQL satellite unavailable" });
     }
 }
 
-module.exports = {getTop50, searchAnime};
+module.exports = {getTop50Anime, searchAnime};
