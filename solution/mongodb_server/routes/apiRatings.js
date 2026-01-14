@@ -1,87 +1,30 @@
-const express = require("express");
-const router = express.Router();
-const recommendationsController = require("../controllers/recommendationsController");
+var express = require('express');
+var router = express.Router();
+const ratingsController = require("../controllers/apiRatingsController");
 
 /**
  * @swagger
- * /recommendations/recommendations:
+ * /ratings/anime/{anime_id}/ratings:
  *   get:
- *     summary: Retrieve recommendations (deprecated)
+ *     summary: Retrieve ratings of a specific anime (deprecated)
  *     description: >
- *       Returns recommendation records stored in MongoDB.
- *       Optional query parameters can be used to filter results.
+ *       Returns all rating records associated with the given anime MyAnimeList ID.
  *       This endpoint is currently not used by the main application
  *       and is kept for completeness.
  *     deprecated: true
  *     tags:
- *       - Recommendations
- *     parameters:
- *       - in: query
- *         name: mal_id
- *         required: false
- *         description: Filter by the source anime MyAnimeList ID.
- *         schema:
- *           type: integer
- *           example: 1
- *       - in: query
- *         name: recommendation_mal_id
- *         required: false
- *         description: Filter by the recommended anime MyAnimeList ID.
- *         schema:
- *           type: integer
- *           example: 20
- *     responses:
- *       "200":
- *         description: Recommendations retrieved successfully.
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   mal_id:
- *                     type: integer
- *                     example: 1
- *                   recommendation_mal_id:
- *                     type: integer
- *                     example: 20
- *       "500":
- *         description: MongoDB internal error.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   example: MongoDB error
- */
-router.get("/recommendations", recommendationsController.getRecommendations);
-
-/**
- * @swagger
- * /recommendations/recommendations/of/{mal_id}:
- *   get:
- *     summary: Retrieve recommendations of a specific anime (deprecated)
- *     description: >
- *       Returns recommendation records for the given anime MyAnimeList ID.
- *       This endpoint is currently not used by the main application
- *       and is kept for completeness.
- *     deprecated: true
- *     tags:
- *       - Recommendations
+ *       - Ratings
  *     parameters:
  *       - in: path
- *         name: mal_id
+ *         name: anime_id
  *         required: true
- *         description: MyAnimeList ID of the source anime.
+ *         description: MyAnimeList ID of the anime.
  *         schema:
  *           type: integer
- *           example: 1
+ *           example: 5114
  *     responses:
  *       "200":
- *         description: Recommendations retrieved successfully.
+ *         description: Anime ratings retrieved successfully.
  *         content:
  *           application/json:
  *             schema:
@@ -89,12 +32,15 @@ router.get("/recommendations", recommendationsController.getRecommendations);
  *               items:
  *                 type: object
  *                 properties:
- *                   mal_id:
+ *                   username:
+ *                     type: string
+ *                     example: johndoe
+ *                   anime_id:
  *                     type: integer
- *                     example: 1
- *                   recommendation_mal_id:
+ *                     example: 5114
+ *                   rating:
  *                     type: integer
- *                     example: 20
+ *                     example: 8
  *       "500":
  *         description: MongoDB internal error.
  *         content:
@@ -106,6 +52,59 @@ router.get("/recommendations", recommendationsController.getRecommendations);
  *                   type: string
  *                   example: MongoDB error
  */
-router.get("/recommendations/of/:mal_id", recommendationsController.getRecommendationsOfAnime);
+router.get('/anime/:anime_id/ratings', ratingsController.getAnimeRatings);
+
+
+/**
+ * @swagger
+ * /ratings/user/{username}/ratings:
+ *   get:
+ *     summary: Retrieve ratings of a specific user (deprecated)
+ *     description: >
+ *       Returns all rating records associated with the given username.
+ *       This endpoint is currently not used by the main application
+ *       and is kept for completeness.
+ *     deprecated: true
+ *     tags:
+ *       - Ratings
+ *     parameters:
+ *       - in: path
+ *         name: username
+ *         required: true
+ *         description: Username whose ratings should be retrieved.
+ *         schema:
+ *           type: string
+ *           example: johndoe
+ *     responses:
+ *       "200":
+ *         description: User ratings retrieved successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   username:
+ *                     type: string
+ *                     example: johndoe
+ *                   anime_id:
+ *                     type: integer
+ *                     example: 5114
+ *                   rating:
+ *                     type: integer
+ *                     example: 8
+ *       "500":
+ *         description: MongoDB internal error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: MongoDB error
+ */
+router.get('/user/:username/ratings', ratingsController.getUserRatings);
 
 module.exports = router;

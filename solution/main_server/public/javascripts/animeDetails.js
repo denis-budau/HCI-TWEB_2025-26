@@ -1,3 +1,15 @@
+/**
+ * Script for the Anime Details page.
+ *
+ * This script runs when the DOM content is loaded and is responsible for:
+ * 1. Parsing the "title" query parameter from the URL.
+ * 2. Sending an Axios GET request to the `/api/anime/search` endpoint.
+ * 3. Finding the anime object that matches the exact title.
+ * 4. Updating the DOM elements on the page with the retrieved anime details.
+ *
+ * If the anime is not found, a "not found" message is displayed.
+ * If an error occurs during the API request, the user is redirected to the error page.
+ */
 document.addEventListener("DOMContentLoaded", () => {
 
     const synopsisText = document.getElementById("synopsisText");
@@ -21,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(function (response) {
             const results = Array.isArray(response.data) ? response.data : [];
 
-            // trova l'anime che ha esattamente quel titolo
+            // Find the anime that exactly matches the title
             const anime = results.find(a => a.title === title);
 
             if (!anime) {
@@ -30,7 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 synopsisStatus.textContent = "";
                 return;
             }
-            //const anime = response.data;
             name.textContent = anime.title ? anime.title : "no title";
             titleJapanese.textContent = anime.titleJapanese ? anime.titleJapanese : "no title Japanese";
             score.textContent = "Score: " + (anime.score ? anime.score : "no score");

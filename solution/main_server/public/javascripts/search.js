@@ -1,3 +1,6 @@
+/**
+ * Search Page Script
+ */
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("searchForm");
     const input = document.getElementById("searchInput");
@@ -19,14 +22,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const type = params.get("type") || "anime";
     document.getElementById("pageTitle").innerText = (type + " search").toUpperCase();
 
+    /**
+     * Renders a single card based on the search type and item data.
+     *
+     * @param {Object} item - Object representing an anime, character, or person.
+     * @returns {DocumentFragment} Cloned DOM node ready to be appended to the results grid.
+     */
     function renderCard(item) {
-        // Scegli il template giusto in base al tipo
+        // Choose the right model based on the type
         let cardTemplate;
         if (type === "anime") { cardTemplate = AnimeCard; }
         else if (type === "character") { cardTemplate = characterCard; }
         else if (type === "person") { cardTemplate = personCard; }
 
-        // Clona il template
+        // Clone template
         const clone = cardTemplate.content.cloneNode(true);
 
         if (type === "anime") {
@@ -49,12 +58,16 @@ document.addEventListener("DOMContentLoaded", () => {
             clone.querySelector(".card-relevant-location").textContent = item.relevantLocation ? `📍 ${item.relevantLocation}` : "📍 no location";
             clone.querySelector(".person-img").src = item.imageUrl;
         }
-        //const linkNode = clone.querySelector("a");
-        //linkNode.href = `/animedetails?title=${encodeURIComponent(item.title)}`;
 
         return clone;
     }
 
+    /**
+     * Fetches search results from the API and renders them on the page.
+     *
+     * @param {string} title - The title or name to search for.
+     * @returns {Promise<void>}
+     */
     async function AxiosAndRender(title) {
         const inputValue = (title || "").trim();
 
@@ -106,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     }
 
-        // Submit should navigate (keeps URLs shareable / refreshable)
+    // Submit should navigate (keeps URLs shareable / refreshable)
     if (form) {
         form.addEventListener("submit", (e) => {
             e.preventDefault();
@@ -115,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!inputValue) return;
 
-            // redirect alla stessa pagina con i nuovi parametri
+            // redirect
             window.location.href = `?title=${encodeURIComponent(inputValue)}&type=${selectedType}`;
         });
     }

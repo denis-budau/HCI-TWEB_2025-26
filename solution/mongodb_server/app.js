@@ -5,11 +5,10 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
 const apiUserProfileRouter = require('./routes/apiUserProfile');
-const ratingsRouter = require('./routes/ratings');
-const favsRouter = require('./routes/favs');
-const recommendationsRouter = require('./routes/recommendations');
+const apiRatingsRouter = require('./routes/apiRatings');
+const apiFavsRouter = require('./routes/apiFavs');
+const apiRecommendationsRouter = require('./routes/apiRecommendations');
 
 const {engine} = require('express-handlebars');
 
@@ -35,13 +34,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-    app.use('/', indexRouter);
-    app.use('/users', usersRouter);
-    //app.use('/userProfile', userProfileRouter);
-    app.use('/ratings', ratingsRouter)
-    app.use('/favs', favsRouter);
-    app.use('/recommendations', recommendationsRouter);
-    app.use('/api/userProfile', apiUserProfileRouter);
+app.use('/', indexRouter);
+app.use('/api/ratings', apiRatingsRouter)
+app.use('/api/favs', apiFavsRouter);
+app.use('/api/recommendations', apiRecommendationsRouter);
+app.use('/api/userProfile', apiUserProfileRouter);
 
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');

@@ -1,30 +1,38 @@
-var express = require('express');
-var router = express.Router();
-const ratingsController = require("../controllers/ratingsController");
+const express = require("express");
+const router = express.Router();
+const recommendationsController = require("../controllers/apiRecommendationsController");
 
 /**
  * @swagger
- * /ratings/anime/{anime_id}/ratings:
+ * /recommendations/recommendations:
  *   get:
- *     summary: Retrieve ratings of a specific anime (deprecated)
+ *     summary: Retrieve recommendations (deprecated)
  *     description: >
- *       Returns all rating records associated with the given anime MyAnimeList ID.
+ *       Returns recommendation records stored in MongoDB.
+ *       Optional query parameters can be used to filter results.
  *       This endpoint is currently not used by the main application
  *       and is kept for completeness.
  *     deprecated: true
  *     tags:
- *       - Ratings
+ *       - Recommendations
  *     parameters:
- *       - in: path
- *         name: anime_id
- *         required: true
- *         description: MyAnimeList ID of the anime.
+ *       - in: query
+ *         name: mal_id
+ *         required: false
+ *         description: Filter by the source anime MyAnimeList ID.
  *         schema:
  *           type: integer
- *           example: 5114
+ *           example: 1
+ *       - in: query
+ *         name: recommendation_mal_id
+ *         required: false
+ *         description: Filter by the recommended anime MyAnimeList ID.
+ *         schema:
+ *           type: integer
+ *           example: 20
  *     responses:
  *       "200":
- *         description: Anime ratings retrieved successfully.
+ *         description: Recommendations retrieved successfully.
  *         content:
  *           application/json:
  *             schema:
@@ -32,15 +40,12 @@ const ratingsController = require("../controllers/ratingsController");
  *               items:
  *                 type: object
  *                 properties:
- *                   username:
- *                     type: string
- *                     example: johndoe
- *                   anime_id:
+ *                   mal_id:
  *                     type: integer
- *                     example: 5114
- *                   rating:
+ *                     example: 1
+ *                   recommendation_mal_id:
  *                     type: integer
- *                     example: 8
+ *                     example: 20
  *       "500":
  *         description: MongoDB internal error.
  *         content:
@@ -52,32 +57,31 @@ const ratingsController = require("../controllers/ratingsController");
  *                   type: string
  *                   example: MongoDB error
  */
-router.get('/anime/:anime_id/ratings', ratingsController.getAnimeRatings);
-
+router.get("/recommendations", recommendationsController.getRecommendationsAnime);
 
 /**
  * @swagger
- * /ratings/user/{username}/ratings:
+ * /recommendations/recommendations/of/{mal_id}:
  *   get:
- *     summary: Retrieve ratings of a specific user (deprecated)
+ *     summary: Retrieve recommendations of a specific anime (deprecated)
  *     description: >
- *       Returns all rating records associated with the given username.
+ *       Returns recommendation records for the given anime MyAnimeList ID.
  *       This endpoint is currently not used by the main application
  *       and is kept for completeness.
  *     deprecated: true
  *     tags:
- *       - Ratings
+ *       - Recommendations
  *     parameters:
  *       - in: path
- *         name: username
+ *         name: mal_id
  *         required: true
- *         description: Username whose ratings should be retrieved.
+ *         description: MyAnimeList ID of the source anime.
  *         schema:
- *           type: string
- *           example: johndoe
+ *           type: integer
+ *           example: 1
  *     responses:
  *       "200":
- *         description: User ratings retrieved successfully.
+ *         description: Recommendations retrieved successfully.
  *         content:
  *           application/json:
  *             schema:
@@ -85,15 +89,12 @@ router.get('/anime/:anime_id/ratings', ratingsController.getAnimeRatings);
  *               items:
  *                 type: object
  *                 properties:
- *                   username:
- *                     type: string
- *                     example: johndoe
- *                   anime_id:
+ *                   mal_id:
  *                     type: integer
- *                     example: 5114
- *                   rating:
+ *                     example: 1
+ *                   recommendation_mal_id:
  *                     type: integer
- *                     example: 8
+ *                     example: 20
  *       "500":
  *         description: MongoDB internal error.
  *         content:
@@ -105,6 +106,6 @@ router.get('/anime/:anime_id/ratings', ratingsController.getAnimeRatings);
  *                   type: string
  *                   example: MongoDB error
  */
-router.get('/user/:username/ratings', ratingsController.getUserRatings);
+router.get("/recommendations/of/:mal_id", recommendationsController.getRecommendationsAnime);
 
 module.exports = router;

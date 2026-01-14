@@ -1,61 +1,57 @@
 const userProfileModel = require('../models/userProfile');
 
-//  Metodo per comunicare con il db per lista di tutti gli utenti
+/**
+ * Get all user profiles from the database.
+ *
+ * @async
+ * @function getAllUser
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @returns {Promise<void>} Sends a JSON array of all user profiles or an error object if failed
+ */
 async function getAllUser (req, res) {
-    console.log('➡️ getAllUser: richiesta ricevuta al controller 3001');
     try {
-        // prende tutti gli utenti dalla collection
         const users = await userProfileModel.find();
-
-        // risponde al client (main server o browser)
         res.status(200).json(users);
     } catch (error) {
-    // Gestisce eventuali errori durante il recupero dei critici
     res.status(500).json({ error: error.message });
     }
 };
 
+/**
+ * Get the top 50 users by number of completed anime.
+ *
+ * @async
+ * @function get50User
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @returns {Promise<void>} Sends a JSON array of top 50 users or an error object if failed
+ */
 async function get50User(req, res) {
     try {
-        const users = await userProfileModel.aggregate([
-            { $match: { completed: { $exists: true, $ne: null } } },
-
-            // normalize completed into a number (we could have checked with pandas better,
-            // but we have some values in MongoDB stored as strings, such as 2,899)
-
-            {
-                $addFields: {
-                    completedStr: { $toString: "$completed" }
-                }
-            },
-            {
-                $addFields: {
-                    completedClean: {
-                        $replaceAll: { input: "$completedStr", find: ",", replacement: "" }
-                    }
-                }
-            },
-            {
-                $addFields: {
-                    completedNum: {
-                        $convert: { input: "$completedClean", to: "int", onError: null, onNull: null }
-                    }
-                }
-            },
-
-            { $match: { completedNum: { $ne: null } } },
-            { $sort: { completedNum: -1 } },
+        const topUsers = await userProfileModel.aggregate([
+            { $sort: { completed: -1 } },
             { $limit: 50 },
-            { $project: { _id: 0, id: 1, username: 1, location: 1, completed: 1, completedNum: 1 } }
         ]);
-        res.status(200).json(users);
+
+        res.status(200).json(topUsers);
     } catch (error) {
         console.error("Error:", error);
         res.status(500).json({ error: error.message });
     }
 }
 
-// Metodo per comunicare con il db per utente specifico
+/**
+ * Get a specific user profile by username.
+ *
+ * @async
+ * @function getUser
+ * @param {Object} req - Express request object
+ * @param {Object} req.params - Route parameters
+ * @param {string} req.params.username - Username of the user to retrieve
+ * @param {Object} res - Express response object
+ * @returns {Promise<void>} Sends a JSON object with the user profile or an error object if failed
+ */
 async function getUser (req, res) {
     try {
         const { username } = req.params;

@@ -5,7 +5,6 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
 const apiUserProfileRouter = require('./routes/apiUserProfile');
 const searchRouter = require('./routes/search');
 const apiAnimeRouter = require('./routes/apiAnime');
@@ -13,9 +12,9 @@ const apiPersonRouter = require('./routes/apiPerson');
 const apiCharacterRouter = require('./routes/apiCharacter');
 const top50Router = require('./routes/top50');
 const animeDetailsRouter = require('./routes/animeDetails');
-const ratingsRouter = require('./routes/ratings');
-const favsRouter = require('./routes/favs');
-const recommendationsRouter = require('./routes/recommendations');
+const apiRatingsRouter = require('./routes/apiRatings');
+const apiFavsRouter = require('./routes/apiFavs');
+const apiRecommendationsRouter = require('./routes/apiRecommendations');
 
 const {engine} = require('express-handlebars');
 
@@ -42,17 +41,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-//app.use('/userProfile', userProfileRouter);
-app.use('/ratings', ratingsRouter)
-app.use('/favs', favsRouter);
-app.use('/recommendations', recommendationsRouter);
-app.use('/top50', top50Router)
-app.use('/search', searchRouter)
 app.use('/api/anime', apiAnimeRouter);
 app.use('/api/character', apiCharacterRouter);
 app.use('/api/person', apiPersonRouter);
 app.use('/api/userProfile', apiUserProfileRouter);
+app.use('/api/ratings', apiRatingsRouter)
+app.use('/api/favs', apiFavsRouter);
+app.use('/api/recommendations', apiRecommendationsRouter);
+app.use('/search', searchRouter)
+app.use('/top50', top50Router)
 app.use('/animedetails', animeDetailsRouter);
 
 const swaggerJSDoc = require('swagger-jsdoc');

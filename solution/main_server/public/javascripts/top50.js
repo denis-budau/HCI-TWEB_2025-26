@@ -1,3 +1,6 @@
+/**
+ * Top50 Page Script
+ */
 document.addEventListener("DOMContentLoaded", () => {
 
     const status = document.getElementById("statusMessage");
@@ -12,17 +15,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const PersonCard = document.getElementById("personCardTemplate");
     const UserCard = document.getElementById("userCardTemplate");
 
-    // Leggi il parametro ?type=...
+    // Read URL parameter
     const params = new URLSearchParams(window.location.search);
     const type = params.get("type") || "anime"; // default: anime
 
-    // Imposta il titolo della pagina
+    // Update page title
     const pageTitle = document.getElementById("pageTitle");
     if (type === "anime") pageTitle.innerText = "TOP 50 ANIME";
     else if (type === "character") pageTitle.innerText = "TOP 50 CHARACTER";
     else if (type === "person") pageTitle.innerText = "TOP 50 PERSON";
     else if (type === "userProfile") pageTitle.innerText = "TOP 50 USER";
 
+    /**
+     * Clone a card template and populate it with data based on type.
+     *
+     * @param {Object} item - Data of the anime, character, person, or user.
+     * @param {number} [position] - Ranking position (used for character, person, user)
+     * @returns {DocumentFragment} - A DOM node ready to be appended to the grid
+     */
     function renderCard(item, position) {
         let template;
         if (type === "anime") template = AnimeCard;
@@ -68,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return clone;
     }
 
-// SHOW loading
+    // SHOW loading
     status.classList.remove("d-none");
     if (statusText) statusText.textContent = "Loading…";
 
