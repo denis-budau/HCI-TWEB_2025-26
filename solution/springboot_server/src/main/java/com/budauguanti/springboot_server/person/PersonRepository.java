@@ -6,8 +6,6 @@ import java.util.List;
 
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Integer> {
-    //this will be case-insensitive
     List<Person> findByNameContainingIgnoreCaseOrderByFavoritesDesc(String name);
-
     List<Person> findTop50ByOrderByFavoritesDesc();
 }

@@ -10,9 +10,11 @@
     <link rel="stylesheet" href="/stylesheets/style.css">
     <script src="/javascripts/navbar.js"></script>
 </head>
-<body class="text-center">
+<body class="text-center d-flex flex-column min-vh-100">
 {{> navbar}}
+<main class="flex-grow-1">
     {{{body}}}
+</main>
 {{> footer}}
 </body>
 </html>

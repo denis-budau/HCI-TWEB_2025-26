@@ -18,7 +18,6 @@ public class DetailsService {
         return repository.findByTitleContainingIgnoreCaseOrderByRankAsc(title);
     }
 
-    //public Details findByMalId(int malId) {return repository.findById(malId);}
     public Details findByMalId(int malId) {
         return repository.findById(malId)
                 .orElseThrow(() -> new RuntimeException("Anime not found: " + malId));

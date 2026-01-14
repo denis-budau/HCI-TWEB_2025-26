@@ -11,6 +11,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * Loads character data from CSV at application startup and stores it in PostgreSQL.
+ * This supports the SQL satellite design of the project.
+ */
 @Component
 public class CsvCharacterImporter implements CommandLineRunner{
     private final CharacterRepository repository;

@@ -1,7 +1,5 @@
 const ratingModel = require('../models/ratings');
 
-//todo uniform the way it's written, do as in recommendationsController
-
 // Metodo per comunicare con il db per ratings di un anime specifico
 async function getAnimeRatings (req, res) {
     try {

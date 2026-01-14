@@ -1,8 +1,0 @@
-//todo delete later
-
-URL TESTING COMMANDS FOR JAVA SPRING BOOT
-All persons: http://localhost:8082/persons
-Search: http://localhost:8082/persons/search?name=Hayao
-Swagger UI: http://localhost:8082/swagger-ui/index.html
-All anime: http://localhost:8082/anime
-Search: http://localhost:8082/anime/search?title=naruto

@@ -1,26 +1,35 @@
 package com.budauguanti.springboot_server.character;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "character")
+@Schema(description = "Anime character entity from PostgreSQL")
 public class Character {
 
     @Id
     @Column(name = "character_mal_id", nullable = false)
+    @Schema(example = "17", description = "MyAnimeList unique character identifier")
     private Integer characterMalId;
 
     @Column(columnDefinition = "TEXT")
     private String url;
 
+    @Schema(example = "Naruto Uzumaki", description = "Character name")
     private String name;
 
     @Column(columnDefinition = "TEXT")
     private String image;
 
+    @Schema(example = "102345", description = "Number of user favorites")
     private Integer favorites;
 
     @Column(columnDefinition = "TEXT")
+    @Schema(
+            example = "Naruto Uzumaki is a ninja from Konohagakure...",
+            description = "Short character biography"
+    )
     private String about;
 
     public Character() {

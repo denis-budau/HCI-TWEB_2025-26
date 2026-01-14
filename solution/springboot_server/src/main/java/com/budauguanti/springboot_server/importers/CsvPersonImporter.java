@@ -10,6 +10,10 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.*;
 
+/**
+ * Loads person data from CSV at application startup and stores it in PostgreSQL.
+ * This supports the SQL satellite design of the project.
+ */
 @Component
 public class CsvPersonImporter implements CommandLineRunner {
 

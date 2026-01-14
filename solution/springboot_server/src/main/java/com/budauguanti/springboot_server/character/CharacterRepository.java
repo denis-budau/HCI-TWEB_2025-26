@@ -7,9 +7,6 @@ import java.util.List;
 
 @Repository
 public interface CharacterRepository extends JpaRepository<Character, Integer> {
-    //this will be case-insensitive
     List<Character> findByNameContainingIgnoreCaseOrderByFavoritesDesc(String character);
-
     List<Character> findTop50ByOrderByFavoritesDesc();
-
 }

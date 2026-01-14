@@ -1,6 +1,5 @@
 package com.budauguanti.springboot_server.character;
 
-import com.budauguanti.springboot_server.details.Details;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -22,7 +21,7 @@ import java.util.List;
         description = "Endpoints to retrieve anime characters stored in PostgreSQL"
 )
 @RestController
-@RequestMapping("api/character")
+@RequestMapping("/api/character")
 public class CharacterController {
 
     private final CharacterService service;

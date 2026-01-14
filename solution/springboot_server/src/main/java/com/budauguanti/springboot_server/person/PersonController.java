@@ -20,7 +20,7 @@ import java.util.List;
         description = "Endpoints to retrieve person data stored in PostgreSQL"
 )
 @RestController
-@RequestMapping("api/person")
+@RequestMapping("/api/person")
 public class PersonController {
 
     private final PersonService service;
@@ -59,13 +59,13 @@ public class PersonController {
     }
 
     @Operation(
-            summary = "Get all persons",
-            description = "Returns all persons currently stored in the database."
+            summary = "Get top 50 persons by favorites",
+            description = "Returns the 50 persons with the highest favorites count."
     )
     @ApiResponses({
             @ApiResponse(
                     responseCode = "200",
-                    description = "Person list retrieved successfully",
+                    description = "Top 50 persons retrieved successfully",
                     content = @Content(
                             mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = Person.class))
@@ -73,10 +73,8 @@ public class PersonController {
             ),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-
-
     @GetMapping
-    public List<Person> get50Person() {
-        return service.getTop50ByFavorites(); // Chiama il nuovo metodo del repository
+    public List<Person> getTop50Persons() {
+        return service.getTop50ByFavorites();
     }
 }

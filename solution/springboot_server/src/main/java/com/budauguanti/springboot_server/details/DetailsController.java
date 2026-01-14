@@ -19,7 +19,7 @@ import java.util.List;
         description = "Endpoints to retrieve anime details stored in PostgreSQL"
 )
 @RestController
-@RequestMapping("api/anime")
+@RequestMapping("/api/anime")
 public class DetailsController {
 
     private final DetailsService service;
@@ -31,7 +31,7 @@ public class DetailsController {
 
     @Operation(
             summary = "Search anime by title (case-insensitive)",
-            description = "Returns a list of anime whose title contains the given string (case-insensitive)."
+            description = "Returns a list of anime whose title contains the given string, ignoring case."
     )
     @ApiResponses({
             @ApiResponse(
@@ -59,9 +59,9 @@ public class DetailsController {
     }
 
     @Operation(
-            summary = "Get all anime",
-            description = "Returns all anime currently stored in the database."
-)
+            summary = "Get top 50 anime by rank",
+            description = "Returns the 50 anime with the best rank (lowest rank value)."
+    )
     @ApiResponses({
             @ApiResponse(
                     responseCode = "200",
@@ -74,14 +74,38 @@ public class DetailsController {
     })
 
     @GetMapping
-    public List<Details> getTop50() {
+    public List<Details> getTop50Anime() {
         return service.getTop50ByRank();
     }
 
+    @Operation(
+            summary = "Get anime details by MyAnimeList ID",
+            description = "Returns the anime details corresponding to the given MAL ID."
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Anime details retrieved successfully",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = Details.class)
+                    )
+            ),
+            @ApiResponse(responseCode = "404", description = "Anime not found"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
     @GetMapping("/{malId}")
-    public Details getByMalId(@PathVariable int malId) {
+    public Details getByMalId(
+            @Parameter(
+                    description = "MyAnimeList unique identifier",
+                    example = "20",
+                    required = true
+            )
+            @PathVariable int malId
+    ) {
         System.out.println("Spring received get-by-id request: " + malId);
         return service.findByMalId(malId);
     }
+
 
 }

@@ -1,4 +1,5 @@
 package com.budauguanti.springboot_server.details;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -8,12 +9,15 @@ import java.util.List;
 
 @Entity
 @Table
+@Schema(description = "Anime details entity from PostgreSQL")
 public class Details {
     @Id
     @Column(name="mal_id", nullable = false)
+    @Schema(example = "20", description = "MyAnimeList ID")
     private Integer malId;
 
     @Column(nullable = false)
+    @Schema(example = "Naruto", description = "Anime title")
     private String title;
 
     @Column(name = "title_japanese")
@@ -28,6 +32,7 @@ public class Details {
     private String type;
     private String status;
 
+    @Schema(example = "8.1", description = "Score on MAL")
     private Double score;
 
     @Column(name = "scored_by")

@@ -1,13 +1,16 @@
 package com.budauguanti.springboot_server.person;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
 @Entity
 @Table
+@Schema(description = "Person entity (staff or creator) from PostgreSQL")
 public class Person {
     @Id
     @Column(name = "person_mal_id", nullable = false)
+    @Schema(example = "1870", description = "MyAnimeList unique person identifier")
     private Integer personMalId;
 
     @Column(columnDefinition = "TEXT")
@@ -17,8 +20,13 @@ public class Person {
     private String websiteUrl;
 
     @Column(name = "image_url", columnDefinition = "TEXT")
+    @Schema(
+            example = "https://cdn.myanimelist.net/images/voiceactors/1/1870.jpg",
+            description = "Profile image URL"
+    )
     private String imageUrl;
 
+    @Schema(example = "Hayao Miyazaki", description = "Person full name")
     private String name;
 
     @Column(name = "given_name")
