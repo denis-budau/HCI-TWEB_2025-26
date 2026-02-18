@@ -1,4 +1,4 @@
-# HCI+TWEB2526 ASSIGNMENT
+# Distributed anime system
 
 ### The Team
 Filippo Guanti 893412
